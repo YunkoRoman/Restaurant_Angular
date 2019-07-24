@@ -1,0 +1,12 @@
+<div class="login-page">
+  <div class="form">
+    <form class="registration-form" #registrationForm = "ngForm" (ngSubmit)="sendForm(registrationForm)">
+      <input  type="text" name="name" placeholder="Ваше ім'я" ngModel />
+      <input  type="text" name="surname" placeholder="Ваше прізвище" ngModel />
+      <input  type="email" name="email" placeholder="Email" ngModel />
+      <input type="password" name="password" placeholder="Пароль" ngModel />
+      <input type="password" name="password" placeholder="Повторіть пароль" ngModel />
+      <button> Зареєструватись </button>
+    </form>
+  </div>
+</div>
