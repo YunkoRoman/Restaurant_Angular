@@ -9,7 +9,8 @@ import {AuthService} from "../services/auth.service";
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private AuthService: AuthService) { }
+  constructor(private AuthService: AuthService,
+              ) { }
 
   ngOnInit() {
   }
