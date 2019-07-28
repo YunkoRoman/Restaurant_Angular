@@ -9,17 +9,22 @@ import {RouterModule, Routes} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { RegistrationComponent } from './registration/registration.component';
+import { CheckedComponent } from './checked/checked.component';
+
 
 const routes: Routes = [
   {path:'login', component: AuthComponent},
   {path:'registration', component: RegistrationComponent},
+  {path:'user/checked', component: CheckedComponent},
+
 
 ] ;
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    CheckedComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {RegistrrationService} from "../services/registrration.service";
+import {RegistrationService} from "../services/registration.service";
 import {NgForm} from "@angular/forms";
 import {Response} from "../interfaces/Response";
 import {Router} from "@angular/router";
@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(private RegistrService: RegistrrationService,
+  constructor(private RegistrService: RegistrationService,
               private router:Router) { }
 
   ngOnInit() {
