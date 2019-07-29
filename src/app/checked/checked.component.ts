@@ -10,7 +10,7 @@ import {Response} from "../interfaces/Response";
   styleUrls: ['./checked.component.css']
 })
 export class CheckedComponent implements OnInit {
-  public orderObj: {   };
+  public orderObj: any;
 
 
   constructor(private route: ActivatedRoute,
@@ -19,7 +19,7 @@ export class CheckedComponent implements OnInit {
   ngOnInit() {
     this.route.queryParamMap
       .subscribe(params => {
-        this.orderObj = {...params};
+        this.orderObj = params;
       });
     this.RegistrationService.CheckedUser(this.orderObj.params.t).subscribe((data:Response) => {
       console.log(data.msg);

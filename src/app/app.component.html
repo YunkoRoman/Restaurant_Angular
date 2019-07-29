@@ -2,9 +2,12 @@
   <div class="Head_rout">
     <a routerLink="">Головна</a>
   </div>
-  <div class="login">
+  <div class="login" *ngIf="visio">
    <div> <a routerLink="registration"> Зареєструватися </a></div>
-   <div> <a routerLink="login"> Увійти </a></div>
+   <div ><a routerLink="login"> Увійти </a></div>
+  </div>
+  <div class="icon" *ngIf="visioIcon" >
+    <a href=""> <img [src]="icon" alt=""></a>
   </div>
 </div>
 

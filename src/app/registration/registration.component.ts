@@ -20,10 +20,20 @@ export class RegistrationComponent implements OnInit {
   sendForm(loginForm:NgForm) {
     if (loginForm.value.password === loginForm.value.password2) {
     this.RegistrService.RegistrUser(loginForm.value.name, loginForm.value.surname,loginForm.value.email, loginForm.value.password)
-      .subscribe((data:Response)=>{
-        if (data.success == true) alert('Ви успішно зареєструвались');
-        this.router.navigate(['']);
+      .subscribe((data: Response) =>{
 
-      })} else alert('НІТ')
+        if (data.success == true) {alert('Ви успішно зареєструвались');
+          this.router.navigate([''])}
+        if (data.success == false) alert(data.msg);
+
+      },
+      (err:any) => {
+        alert (err.error.msg);
+      }
+      )}
+      if (loginForm.value.password != loginForm.value.password2) {
+      alert('Поролі не співпадають')
+      }
+
   }
 }
