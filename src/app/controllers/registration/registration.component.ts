@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {RegistrationService} from "../services/registration.service";
+import {RegistrationService} from "../../services/registration.service";
 import {NgForm} from "@angular/forms";
-import {Response} from "../interfaces/Response";
+import {Response} from "../../interfaces/Response";
 import {Router} from "@angular/router";
 
 

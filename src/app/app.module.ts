@@ -5,14 +5,15 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import { AuthComponent } from './auth/auth.component';
+import { AuthComponent } from './controllers/auth/auth.component';
 import {RouterModule, Routes} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import { RegistrationComponent } from './registration/registration.component';
-import { CheckedComponent } from './checked/checked.component';
+import { RegistrationComponent } from './controllers/registration/registration.component';
+import { CheckedComponent } from './controllers/checked/checked.component';
 import {HttpAuthInterceptor} from "./interceptor/auth.interceptor";
-import { ListRestaurantsComponent } from './list-restaurants/list-restaurants.component';
+import { ListRestaurantsComponent } from './controllers/list-restaurants/list-restaurants.component';
+import { RestaurantComponent } from './controllers/restaurant/restaurant.component';
 
 
 const routes: Routes = [
@@ -20,8 +21,7 @@ const routes: Routes = [
   {path:'login', component: AuthComponent},
   {path:'registration', component: RegistrationComponent},
   {path:'user/checked', component: CheckedComponent},
-
-
+  {path:'restaurant/:id', component: RestaurantComponent},
 ] ;
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ const routes: Routes = [
     AuthComponent,
     RegistrationComponent,
     CheckedComponent,
-    ListRestaurantsComponent
+    ListRestaurantsComponent,
+    RestaurantComponent
   ],
   imports: [
     BrowserModule,

@@ -28,3 +28,16 @@
 .box_description_children{
   margin: 10px;
 }
+.box_description_children_name {
+  margin: 5px;
+  font-size: x-large;
+  font-weight: bold;
+}
+.box_description_children_description{
+
+  margin: 20px 0 0 10px;
+}
+.box_description_children_name>a{
+  text-decoration: none;
+}
+

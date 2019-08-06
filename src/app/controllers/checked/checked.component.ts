@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {RegistrationService} from "../services/registration.service";
-import {Response} from "../interfaces/Response";
+import {RegistrationService} from "../../services/registration.service";
+import {Response} from "../../interfaces/Response";
 
 
 @Component({

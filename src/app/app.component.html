@@ -1,14 +1,19 @@
 <div class="Head">
   <div class="Head_rout">
-    <a routerLink="">Головна</a>
+    <button routerLink="" type="button" class="btn btn-outline-primary">Головна</button>
   </div>
   <div class="login" *ngIf="visio">
-   <div> <a routerLink="registration"> Зареєструватися </a></div>
-   <div ><a routerLink="login"> Увійти </a></div>
+   <div>
+     <button routerLink="registration" type="button" class="btn btn-outline-success">Зареєструватися</button>
+   </div>
+   <div >
+     <button routerLink="login" type="button" class="btn btn-outline-success">Увійти</button>
+   </div>
   </div>
   <div class="icon" *ngIf="visioIcon" >
     <a href=""> <img [src]="icon" alt=""></a>
   </div>
 </div>
+
 
 <router-outlet></router-outlet>
