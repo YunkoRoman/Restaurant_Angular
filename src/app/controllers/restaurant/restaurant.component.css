@@ -1,0 +1,23 @@
+.box_restaurant{
+  width: 100%;
+  height: 100%;
+}
+.box_restaurant_child{
+  width: 200px;
+  height: 250px;
+  border: 1px solid #3132ff;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+.head{
+  width: 100px;
+  height: 20px;
+  border: 1px solid fuchsia;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+.child_photo{
+  width: 200px;
+  height: 145px;
+  border: 1px solid black;
+}

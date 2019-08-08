@@ -1,1 +1,11 @@
-<p>restaurant works!</p>
+<div class="box_restaurant">
+  <div class="head"> <p>Піцци</p> </div>
+  <div class="box_restaurant_child" *ngFor="let position of pizza_menu">
+    <div class="child_photo">
+      Картинка
+    </div>
+    <div class="box_description_children">
+        <p>{{position.pizza_menu.name}}</p>
+    </div>
+  </div>
+</div>

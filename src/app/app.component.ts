@@ -10,9 +10,11 @@ import {Component, DoCheck} from '@angular/core';
 
 
 export class AppComponent implements DoCheck{
- visio: boolean;
- visioIcon:boolean;
+ public visio: boolean;
+ public visioIcon:boolean;
+
   private icon = require("./assets/icon1.png");
+
 constructor(){
 
 }
@@ -23,10 +25,11 @@ constructor(){
     if (localStorage.getItem('token')) {this.visioIcon = true}
     if (!localStorage.getItem('token')) {this.visioIcon = false}
 
+
   }
 
 
-
-
-
+  exiteBtn() {
+    localStorage.removeItem('token')
+  }
 }
