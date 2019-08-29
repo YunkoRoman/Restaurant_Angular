@@ -14,6 +14,8 @@ import { CheckedComponent } from './controllers/checked/checked.component';
 import {HttpAuthInterceptor} from "./interceptor/auth.interceptor";
 import { ListRestaurantsComponent } from './controllers/list-restaurants/list-restaurants.component';
 import { RestaurantComponent } from './controllers/restaurant/restaurant.component';
+import { BasketComponent } from './controllers/basket/basket.component';
+import { SendToEmailComponent } from './controllers/send-to-email/send-to-email.component';
 
 
 const routes: Routes = [
@@ -22,6 +24,8 @@ const routes: Routes = [
   {path:'registration', component: RegistrationComponent},
   {path:'user/checked', component: CheckedComponent},
   {path:'restaurant/:id', component: RestaurantComponent},
+  {path:'email', component: SendToEmailComponent},
+  {path:'basket', component: BasketComponent},
 ] ;
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ const routes: Routes = [
     RegistrationComponent,
     CheckedComponent,
     ListRestaurantsComponent,
-    RestaurantComponent
+    RestaurantComponent,
+    BasketComponent,
+    SendToEmailComponent
   ],
   imports: [
     BrowserModule,

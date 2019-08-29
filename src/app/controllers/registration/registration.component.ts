@@ -23,7 +23,7 @@ export class RegistrationComponent implements OnInit {
       .subscribe((data: Response) =>{
 
         if (data.success == true) {alert('Ви успішно зареєструвались');
-          this.router.navigate([''])}
+          this.router.navigate(['email'])}
         if (data.success == false) alert(data.msg);
 
       },

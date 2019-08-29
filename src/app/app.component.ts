@@ -13,7 +13,9 @@ export class AppComponent implements DoCheck{
  public visio: boolean;
  public visioIcon:boolean;
 
-  private icon = require("./assets/icon1.png");
+  public icon = require("./assets/icon1.png");
+  public basketIcon = require('./assets/basket.png');
+
 
 constructor(){
 

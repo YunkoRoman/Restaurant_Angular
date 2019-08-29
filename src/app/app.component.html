@@ -2,6 +2,9 @@
   <div class="Head_rout">
     <button routerLink="" type="button" class="btn btn-outline-primary">Головна</button>
   </div>
+  <div class="basket_icon">
+    <a routerLink="basket"> <img [src]="basketIcon" alt=""></a>
+  </div>
   <div class="login" *ngIf="visio">
     <div>
       <button routerLink="registration" type="button" class="btn btn-outline-success">Зареєструватися</button>

@@ -1,23 +1,34 @@
-.box_restaurant{
+body{
+  display: flex;
+}
+.description_box{
+
+}
+.big_menu_box{
   width: 100%;
   height: 100%;
+  display: flex;
 }
-.box_restaurant_child{
-  width: 200px;
-  height: 250px;
-  border: 1px solid #3132ff;
-  margin-top: 10px;
-  margin-left: 50px;
+.menu_name_box{
+
 }
-.head{
-  width: 100px;
+.menu_button{
+  width: 120px;
+  height: 52px;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  background-color: #ffcb70;
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu_button>p{
+  width: 198px;
   height: 20px;
-  border: 1px solid fuchsia;
-  margin-top: 10px;
-  margin-left: 50px;
-}
-.child_photo{
-  width: 200px;
-  height: 145px;
-  border: 1px solid black;
+  color: #ffffff;
+  font-family: "Open Sans - Semibold";
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 23px;
 }

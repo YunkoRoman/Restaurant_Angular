@@ -1,11 +1,13 @@
-<div class="box_restaurant">
-  <div class="head"> <p>Піцци</p> </div>
-  <div class="box_restaurant_child" *ngFor="let position of pizza_menu">
-    <div class="child_photo">
-      Картинка
-    </div>
-    <div class="box_description_children">
-        <p>{{position.pizza_menu.name}}</p>
-    </div>
+<div class="description_box">
+  <h1> Виберіть меню </h1>
+</div>
+<div class="big_menu_box">
+  <div *ngFor="let menu of menus" class="menu_name_box">
+    <button class="menu_button" (click)="UploadProduct(menu.id)">
+      <p>{{menu.name}}</p>
+    </button>
   </div>
+</div>
+<div [class]="showBlock" *ngFor="let product of productsObj">
+  <p>{{product.product.name}}</p>
 </div>
