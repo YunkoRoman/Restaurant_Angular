@@ -8,6 +8,21 @@
     </button>
   </div>
 </div>
-<div [class]="showBlock" *ngFor="let product of productsObj">
-  <p>{{product.product.name}}</p>
+<div class="products_box">
+  <div [class]="showBlock" *ngFor="let products of productsObj">
+    <div class="products_childerns_box">
+      <div class="product_photo"><p>Тут буде картинка</p></div>
+      <div class="product_name"><p>{{products.product.name}}</p></div>
+      <div class="product_order">
+        <div class="counter">
+          <!--<button (click)="MinusProduct()">-</button>-->
+          <!--<input type="text" style="width: 25px; height: 25px" [(ngModel)]="counter" name="counter" required  >-->
+          <!--<button (click)="AddProduct()">+</button>-->
+        </div>
+        <button (click)="Buy(products.product.id)">
+          <p>Замовити</p>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

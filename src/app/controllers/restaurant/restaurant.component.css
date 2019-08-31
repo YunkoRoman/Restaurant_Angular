@@ -1,13 +1,20 @@
-body{
-  display: flex;
-}
-.description_box{
 
+.description_box{
+  text-align:  center;
+}
+.description_box>h1{
+  color: #ff8614;
+  font-family: "Open Sans - Semibold";
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 23px;
 }
 .big_menu_box{
   width: 100%;
   height: 100%;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .menu_name_box{
 
@@ -24,11 +31,39 @@ body{
   align-items: center;
 }
 .menu_button>p{
-  width: 198px;
-  height: 20px;
   color: #ffffff;
   font-family: "Open Sans - Semibold";
   font-size: 20px;
   font-weight: 400;
   line-height: 23px;
+}
+.products_box{
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+.products_childerns_box{
+  border: 1px solid black;
+  width: 225px;
+  height: 310px;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  /*align-content: space-between;*/
+}
+.product_photo{
+  width: 100%;
+  height: 160px;
+  border: 1px solid red;
+  text-align:  center;
+}
+.product_name{
+  width: 100%;
+  text-align:  center;
+
 }

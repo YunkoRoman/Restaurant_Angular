@@ -1,1 +1,15 @@
-<p>basket works!</p>
+<div class="basket_box">
+  <div class="product_With_Basket">
+    <div class="product_child" *ngFor="let product of basketProducts">
+      <div class="product">
+        <div><p>{{product.product.name}}</p></div>
+        <div>
+          <button (click)="subtractionProduct()">-</button>
+          <p>{{product.quantity}}</p>
+          <button (click)="addProduct(product.id,product.quantity)">+</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
