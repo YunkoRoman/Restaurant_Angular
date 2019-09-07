@@ -1,13 +1,16 @@
-<div class="box" >
-  <div class="box_child" *ngFor="let list of restaurantList">
-    <div class="box_photo">Картинка</div>
-    <div class="box_description">
-      <div class="box_description_children">
-        <h1 class="box_description_children_name"><a [routerLink]="['restaurant/'+ list.id]">{{list.name}}</a></h1>
-        <p class="box_description_children_description">{{list.description}}</p>
+<div class="name_page_box">
+  <div class="name-page"><p>Ресторани</p></div>
+</div>
+<div class="restaurant_box">
+  <div class="box">
+    <a  class="box_child" *ngFor="let list of restaurantList" [routerLink]="['restaurant/'+ list.id]">
+      <div class="box_photo">Картинка</div>
+      <div class="box_description">
+        <div class="box_description_children">
+          <h1 class="box_description_children_name"><a>{{list.name}}</a></h1>
+          <!--<p class="box_description_children_description">{{list.description}}</p>-->
+        </div>
       </div>
-    </div>
-
+    </a>
   </div>
-
 </div>

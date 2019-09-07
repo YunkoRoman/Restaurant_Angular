@@ -1,5 +1,8 @@
-<div class="description_box">
-  <h1> Виберіть меню </h1>
+<div class="big_description_box">
+  <div class="description_box">
+    <p class="res_name">{{restaurantName }}</p>
+    <p class="res_menu"> Виберіть меню </p>
+  </div>
 </div>
 <div class="big_menu_box">
   <div *ngFor="let menu of menus" class="menu_name_box">
@@ -14,12 +17,8 @@
       <div class="product_photo"><p>Тут буде картинка</p></div>
       <div class="product_name"><p>{{products.product.name}}</p></div>
       <div class="product_order">
-        <div class="counter">
-          <!--<button (click)="MinusProduct()">-</button>-->
-          <!--<input type="text" style="width: 25px; height: 25px" [(ngModel)]="counter" name="counter" required  >-->
-          <!--<button (click)="AddProduct()">+</button>-->
-        </div>
-        <button (click)="Buy(products.product.id)">
+        <div class="product_order_price">{{products.product.price}} грн</div>
+        <button (click)="Buy(products.product.id,products.product.price )" class="product_order_btn">
           <p>Замовити</p>
         </button>
       </div>

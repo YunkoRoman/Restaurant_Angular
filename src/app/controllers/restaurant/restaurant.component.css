@@ -1,6 +1,20 @@
-
+.big_description_box{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .description_box{
-  text-align:  center;
+  width: 1145px;
+}
+.res_name{
+  font-size: xx-large;
+  font-weight: bold;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+.res_menu{
+  font-size: x-large;
+  font-weight: bold;
 }
 .description_box>h1{
   color: #ff8614;
@@ -66,4 +80,18 @@
   width: 100%;
   text-align:  center;
 
+}
+.product_name p{
+  font-size: 1.25em;
+}
+.product_order{
+  display: flex;
+}
+.product_order_btn{
+  width: 90px;
+  height: 30px;
+}
+.product_order_price{
+  font-size: 1.5em;
+  margin-right: 10px;
 }

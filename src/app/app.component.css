@@ -1,11 +1,23 @@
 .Head{
   height: 50px;
   width: 100%;
-  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.Head_child{
+  width: 1120px;
   display: flex;
   justify-content: space-between;
+
 
 }
 .login{
   display: flex;
+}
+.register-btn{
+  margin-right: 25px;
+}
+.register-btn>button{
+  border-radius: 50%;
 }

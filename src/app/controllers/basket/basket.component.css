@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
 
 }
 .product_With_Basket{
@@ -13,4 +14,23 @@
 .product{
   display: flex;
   justify-content: space-between;
+  margin: 10px;
+  border: 1px dashed rgba(22, 231, 255, 0.6);
+  height: 100px;
+  align-items: center;
+}
+.basket_btn{
+  display: flex;
+}
+
+.basket_quantity{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.basket_total_order{
+  display: flex;
+}
+.basket_inp{
+  width: 30px;
+  height: 30px;
 }

@@ -14,7 +14,8 @@ export class RestaurantComponent implements OnInit {
   public menus: any = [];
   public productsObj: any = [];
   public showBlock: boolean = false;
-  public counter: number;
+  public restaurantName: string;
+
 
   constructor(private route: ActivatedRoute,
               private RestaurantMenuService: RestaurantMenuService,
@@ -28,12 +29,16 @@ export class RestaurantComponent implements OnInit {
       });
     this.RestaurantMenuService.UploadMenu(this.restaurant_id).subscribe((data: Response) => {
       this.menus = data.msg;
-
+      console.log(data.msg);
+      const arr = data.msg;
+      arr.forEach(e => {
+        this.restaurantName = e.restaurant.name;
+      });
     })
   }
 
-  Buy(product_id) {
-    this.BasketService.addProduct(product_id).subscribe((data: Response) => {
+  Buy(product_id, price) {
+    this.BasketService.addProduct(product_id, price).subscribe((data: Response) => {
       console.log(data.msg);
     })
   }
@@ -43,7 +48,7 @@ export class RestaurantComponent implements OnInit {
       this.productsObj = data.msg;
       console.log(data.msg);
       if (data.success === true) this.showBlock = true;
-      this.counter = 1
+
     })
   }
 

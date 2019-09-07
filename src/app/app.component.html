@@ -1,23 +1,24 @@
 <div class="Head">
-  <div class="Head_rout">
-    <button routerLink="" type="button" class="btn btn-outline-primary">Головна</button>
-  </div>
-  <div class="basket_icon">
-    <a routerLink="basket"> <img [src]="basketIcon" alt=""></a>
-  </div>
-  <div class="login" *ngIf="visio">
-    <div>
-      <button routerLink="registration" type="button" class="btn btn-outline-success">Зареєструватися</button>
+  <div class="Head_child">
+    <div class="Head_rout">
+      <button routerLink="" type="button" class="btn btn-outline-primary">Головна</button>
     </div>
-    <div>
-      <button routerLink="login" type="button" class="btn btn-outline-success">Увійти</button>
+    <div class="basket_icon">
+      <a routerLink="basket"> <img [src]="basketIcon" alt=""></a>
+    </div>
+    <div class="login" *ngIf="visio">
+      <div class="register-btn">
+        <button routerLink="registration" type="button" class="btn btn-outline-success">Зареєструватися</button>
+      </div>
+      <div class="log_in">
+        <button routerLink="login" type="button" class="btn btn-outline-success">Увійти</button>
+      </div>
+    </div>
+    <div class="icon" *ngIf="visioIcon">
+      <a routerLink=""> <img [src]="icon" alt=""></a>
+      <button (click)="exiteBtn()">Вихід</button>
     </div>
   </div>
-  <div class="icon" *ngIf="visioIcon">
-    <a routerLink=""> <img [src]="icon" alt=""></a>
-    <button (click)="exiteBtn()">Вихід</button>
-  </div>
-
 </div>
 
 

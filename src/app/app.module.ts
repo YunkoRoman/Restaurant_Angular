@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
@@ -16,6 +15,7 @@ import { ListRestaurantsComponent } from './controllers/list-restaurants/list-re
 import { RestaurantComponent } from './controllers/restaurant/restaurant.component';
 import { BasketComponent } from './controllers/basket/basket.component';
 import { SendToEmailComponent } from './controllers/send-to-email/send-to-email.component';
+
 
 
 const routes: Routes = [
@@ -43,7 +43,8 @@ const routes: Routes = [
     AppRoutingModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

@@ -2,13 +2,34 @@
   <div class="product_With_Basket">
     <div class="product_child" *ngFor="let product of basketProducts">
       <div class="product">
-        <div><p>{{product.product.name}}</p></div>
         <div>
-          <button (click)="subtractionProduct()">-</button>
-          <p>{{product.quantity}}</p>
-          <button (click)="addProduct(product.id,product.quantity)">+</button>
+          <div class="delete_btn">
+            <button (click)="deleteProduct(product.id)">Видалити</button>
+          </div>
+          <div>
+            <p>{{product.product.name}}</p>
+          </div>
         </div>
-
+        <div class="basket_total_order">
+          <div class="basket_product_price">
+            <p>{{product.product.price}} грн</p>
+          </div>
+          <div class="basket_btn">
+            <div>
+              <button (click)="subtractionProduct(product.id,product.quantity, product.product.price)">-</button>
+            </div>
+            <div class="basket_quantity">
+              <form [formGroup]="nameForm">
+                <input formControlName="quantity" type="number" [value]="product.quantity"
+                       (blur)="ChangeQuantity(product.id, product.product.price)" class="basket_inp">
+              </form>
+            </div>
+            <div>
+              <button (click)="addProduct(product.id,product.quantity, product.product.price)">+</button>
+            </div>
+            <div class="basket_total_product_price"><p>{{product.total_price}}</p></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
