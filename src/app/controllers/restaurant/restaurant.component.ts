@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {Response} from "../../interfaces/Response";
 import {RestaurantMenuService} from "../../services/restaurant-menu.service";
 import {BasketService} from "../../services/basket.service";
+import {JSON_CONFIG_FILENAME} from "tslint/lib/configuration";
+import {type} from "os";
 
 @Component({
   selector: 'app-restaurant',
@@ -15,6 +17,7 @@ export class RestaurantComponent implements OnInit {
   public productsObj: any = [];
   public showBlock: boolean = false;
   public restaurantName: string;
+  public basket: object = {};
 
 
   constructor(private route: ActivatedRoute,
@@ -34,13 +37,25 @@ export class RestaurantComponent implements OnInit {
       arr.forEach(e => {
         this.restaurantName = e.restaurant.name;
       });
-    })
+    });
+    this.CheckBasket()
   }
 
-  Buy(product_id, price) {
-    this.BasketService.addProduct(product_id, price).subscribe((data: Response) => {
-      console.log(data.msg);
-    })
+  CheckBasket() {
+    if (localStorage.getItem('basket') != null)
+      this.basket = JSON.parse(localStorage.getItem('basket') )
+  }
+
+  Buy(product_id) {
+    const Product_id = Number(product_id);
+
+    if (this.basket[Product_id] != undefined) {
+      this.basket[Product_id]++
+    } else {
+      this.basket[Product_id] = 1
+    }
+    localStorage.setItem('basket', JSON.stringify(this.basket));
+
   }
 
   UploadProduct(menu_id) {

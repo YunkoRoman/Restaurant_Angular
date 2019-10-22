@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {BasketService} from "../../services/basket.service";
 import {Response} from "../../interfaces/Response";
 import {FormGroup, FormControl} from "@angular/forms";
+import {PaymentService} from "../../services/payment.service";
 
 @Component({
   selector: 'app-basket',
@@ -10,55 +11,99 @@ import {FormGroup, FormControl} from "@angular/forms";
   styleUrls: ['./basket.component.css']
 })
 export class BasketComponent implements OnInit {
-  public basketProducts: any;
-  public quantity: any;
-  public nameForm: FormGroup;
+  private basketProducts: any = [];
+  private quantity: number;
+  private nameForm: FormGroup;
+  private deleteIcon = require("../../assets/delete.png");
+  private arrProductId: any = [];
+  private basket: any;
 
-  constructor(private BasketService: BasketService) {
+  constructor(
+    private BasketService: BasketService,
+    private PaymentService: PaymentService
+  ) {
   }
 
   ngOnInit() {
-    this.BasketService.refreshNeeded$.subscribe(() => {
-      this.getAllProduct();
-    });
     this.getAllProduct();
 
     this.nameForm = new FormGroup({
       quantity: new FormControl('', {
-        updateOn: 'blur',
+        updateOn: 'blur'
       })
     });
   }
 
   getAllProduct() {
-    this.BasketService.readProduct().subscribe((data: Response) => {
-      console.log(data.msg);
-      this.basketProducts = data.msg;
+
+    this.basket = JSON.parse(localStorage.getItem('basket'));
+
+    const id = Object.keys(this.basket);
+
+    id.map(e => {
+      const product_id = Number(e);
+      this.arrProductId.push(product_id)
+    });
+
+    this.BasketService.readProduct(this.arrProductId).subscribe((data: Response) => {
+      this.basketProducts.push(data.msg)
     })
   }
 
-  addProduct(id, quantity, price) {
-    this.BasketService.additionQuantity(id, quantity, price).subscribe((data: Response) => {
-      console.log(data.msg);
-    })
-  }
 
-  subtractionProduct(id, quantity, price) {
-    this.BasketService.subtractionQuantity(id, quantity, price).subscribe((data: Response) => {
-      console.log(data.msg);
-    })
+  sendOrder() {
   }
 
 
+  // This is to pay for the order
+  // const handler = (<any> window).StripeCheckout.configure({
+  //   key: 'pk_test_GZCLbneEEwGKRuOdCAnzo0YX000LBRrSet',
+  //   locate: 'auto',
+  //   token:(token: any) => {
+  //     if (token) {
+  //       const tokenId = token.id;
+  //       this.PaymentService.purchase(token).subscribe(data => {
+  //         console.log(data);
+  //       })
+  //     }
+  //   }
+  //   }
+  //   );
+  //   handler.open({
+  //     amount: 200
+  //   });
+  //
+  // }
+  AddQuant(id) {
+    this.basket[id]++;
+    localStorage.setItem('basket', JSON.stringify(this.basket));
 
-  ChangeQuantity(id, price) {
+  }
+
+  MinusQuant(id) {
+    if (this.basket[id] > 1) {
+      this.basket[id]--;
+      localStorage.setItem('basket', JSON.stringify(this.basket));
+    }
+  }
+
+  ChangeQuantity(id) {
     const quantity = this.nameForm.value.quantity;
-    this.BasketService.addQuantityWhenTouchInput(id, quantity, price).subscribe((data: Response) => {
-      console.log(data.msg);
-    })
+    if (quantity >= 1) {
+      this.basket[id] = quantity;
+      localStorage.setItem('basket', JSON.stringify(this.basket));
+    } else {
+      alert('Quantity must by >= 1 ')
+    }
   }
 
-  deleteProduct(id: any) {
-    
+  DeleteProduct(id) {
+    const value = this.basketProducts[0].map(obj => {return obj.id});
+    const index = value.indexOf(id);
+    this.basketProducts[0].splice(index,1);
+
+    delete this.basket[id];
+
+    localStorage.setItem('basket', JSON.stringify(this.basket));
   }
 }

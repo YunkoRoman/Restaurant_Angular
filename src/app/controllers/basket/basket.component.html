@@ -1,36 +1,59 @@
 <div class="basket_box">
+  <div class="basket_title"><p>Оформити замовлення</p></div>
   <div class="product_With_Basket">
-    <div class="product_child" *ngFor="let product of basketProducts">
+    <div class="product_child" *ngFor="let product of basketProducts[0]">
       <div class="product">
-        <div>
+        <div class="basket_name_product">
           <div class="delete_btn">
-            <button (click)="deleteProduct(product.id)">Видалити</button>
+            <a (click)="DeleteProduct(product.id)">
+              <img [src]="deleteIcon">
+            </a>
           </div>
           <div>
-            <p>{{product.product.name}}</p>
+            <p>{{product.name}}</p>
           </div>
         </div>
         <div class="basket_total_order">
           <div class="basket_product_price">
-            <p>{{product.product.price}} грн</p>
+            <p>{{product.price}} грн</p>
           </div>
           <div class="basket_btn">
             <div>
-              <button (click)="subtractionProduct(product.id,product.quantity, product.product.price)">-</button>
+              <button (click)="MinusQuant(product.id)">-</button>
             </div>
             <div class="basket_quantity">
               <form [formGroup]="nameForm">
-                <input formControlName="quantity" type="number" [value]="product.quantity"
-                       (blur)="ChangeQuantity(product.id, product.product.price)" class="basket_inp">
+                <input formControlName="quantity" type="number"
+                       class="basket_inp" [value]="basket[product.id]" (blur)="ChangeQuantity(product.id)">
               </form>
             </div>
             <div>
-              <button (click)="addProduct(product.id,product.quantity, product.product.price)">+</button>
+              <button (click)="AddQuant(product.id)">+</button>
             </div>
-            <div class="basket_total_product_price"><p>{{product.total_price}}</p></div>
+            <div class="basket_total_product_price"><p></p></div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="basket_payment_box">
+    <div class="choose_method">
+      <form class="pay_form">
+        <div class="radio_inp">
+          <input type="radio" id="contactChoice1"
+                 name="contact" value="cash" checked>
+          <label for="contactChoice1" class="contactChoice1">Оплатити готівкою</label>
+
+          <input type="radio" id="contactChoice2"
+                 name="contact" value="card">
+          <label for="contactChoice2">Безготівкова оплата</label>
+        </div>
+        <div class="pay_form_btn">
+          <button (click)="sendOrder()">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
 </div>

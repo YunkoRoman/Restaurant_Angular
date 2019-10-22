@@ -16,33 +16,17 @@ export class BasketService {
   constructor(public http: HttpClient) {
   }
 
-  addProduct(product_id, price) {
-    return this.http.post('http://localhost:3000/basket', {product_id, price})
+
+
+  readProduct(MassiveProduct_id) {
+    return this.http.post('http://localhost:3000/basket', MassiveProduct_id)
   }
 
-  readProduct() {
-    return this.http.get('http://localhost:3000/basket')
-  }
 
-  additionQuantity(id, quantity, price) {
-    return this.http
-      .put('http://localhost:3000/basket/addition', {id, quantity, price})
-      .pipe(tap(() => {
-        this._refreshNeeded$.next();
-      }))
+  deleteProduct(id) {
+    return this.http.delete('http://localhost:3000/basket/'+id )
   }
-  subtractionQuantity(id, quantity, price) {
-    return this.http
-      .put('http://localhost:3000/basket/subtraction', {id, quantity, price})
-      .pipe(tap(() => {
-        this._refreshNeeded$.next();
-      }))
-  }
-  addQuantityWhenTouchInput(id, quantity, price) {
-    return this.http
-      .put('http://localhost:3000/basket', {id, quantity, price})
-      .pipe(tap(() => {
-        this._refreshNeeded$.next();
-      }))
+  sendOrder(id) {
+    return this.http.post('http://localhost:3000/basket/order', id )
   }
 }
