@@ -1,27 +1,35 @@
-<div class="big_description_box">
-  <div class="description_box">
+<div class="res_head_img">
+  <img [src]="headImg" alt="" width="100%" height="400px">
+</div>
+<div class="name_and_basket_box">
+  <div class="big_description_box">
     <p class="res_name">{{restaurantName }}</p>
-    <p class="res_menu"> Виберіть меню </p>
+  </div>
+  <div class="basket_card">
+    <p class="res_name"> Ваше замовлення в {{restaurantName}}</p>
   </div>
 </div>
-<div class="big_menu_box">
-  <div *ngFor="let menu of menus" class="menu_name_box">
-    <button class="menu_button" (click)="UploadProduct(menu.id)">
-      <p>{{menu.name}}</p>
-    </button>
-  </div>
-</div>
-<div class="products_box">
-  <div [class]="showBlock" *ngFor="let products of productsObj">
-    <div class="products_childerns_box">
-      <div class="product_photo"><p>Тут буде картинка</p></div>
-      <div class="product_name"><p>{{products.product.name}}</p></div>
-      <div class="product_order">
-        <div class="product_order_price">{{products.product.price}} грн</div>
-        <button (click)="Buy(products.product.id,products.product.price )" class="product_order_btn">
-          <p>Замовити</p>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="menu"></div>
+
+
+<!--<div class="big_menu_box">-->
+<!--<div *ngFor="let menu of menus" class="menu_name_box">-->
+<!--<button class="menu_button" (click)="UploadProduct(menu.id)">-->
+<!--<p>{{menu.name}}</p>-->
+<!--</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="products_box">-->
+<!--<div [class]="showBlock" *ngFor="let products of productsObj">-->
+<!--<div class="products_childerns_box">-->
+<!--<div class="product_photo"><p>Тут буде картинка</p></div>-->
+<!--<div class="product_name"><p>{{products.product.name}}</p></div>-->
+<!--<div class="product_order">-->
+<!--<div class="product_order_price">{{products.product.price}} грн</div>-->
+<!--<button (click)="Buy(products.product.id,products.product.price )" class="product_order_btn">-->
+<!--<p>Замовити</p>-->
+<!--</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->

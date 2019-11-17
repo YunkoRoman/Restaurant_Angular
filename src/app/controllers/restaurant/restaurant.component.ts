@@ -18,6 +18,7 @@ export class RestaurantComponent implements OnInit {
   public showBlock: boolean = false;
   public restaurantName: string;
   public basket: object = {};
+  public headImg = require('../../assets/head_img.jpg');
 
 
   constructor(private route: ActivatedRoute,

@@ -1,97 +1,49 @@
-.big_description_box{
-  width: 100%;
+.name_and_basket_box {
+  height: 10000px;
+  position: absolute;
+  margin-top: 370px;
   display: flex;
-  justify-content: center;
 }
-.description_box{
-  width: 1145px;
+
+.big_description_box {
+  border-radius: 10px;
+  width: 780px;
+  height: 150px;
+  margin-left: 130px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.res_name{
+
+.res_name {
+
+  margin-left: 15px;
   font-size: xx-large;
   font-weight: bold;
   margin-bottom: 25px;
   margin-top: 25px;
 }
-.res_menu{
-  font-size: x-large;
-  font-weight: bold;
+
+.res_head_img {
+  width: auto;
+  display: inline-block;
+  height: 400px;
+  position: absolute;
 }
-.description_box>h1{
-  color: #ff8614;
-  font-family: "Open Sans - Semibold";
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 23px;
-}
-.big_menu_box{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.menu_name_box{
+
+.basket {
+
 
 }
-.menu_button{
-  width: 120px;
-  height: 52px;
-  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.25);
+
+.basket_card {
+  margin-left: 25px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 350px;
+  height: 420px;
   border-radius: 10px;
-  background-color: #ffcb70;
-  margin: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /*position: fixed;*/
 }
-.menu_button>p{
-  color: #ffffff;
-  font-family: "Open Sans - Semibold";
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 23px;
-}
-.products_box{
 
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-
-}
-.products_childerns_box{
-  border: 1px solid black;
-  width: 225px;
-  height: 310px;
-  margin: 10px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  /*align-content: space-between;*/
-}
-.product_photo{
-  width: 100%;
-  height: 160px;
-  border: 1px solid red;
-  text-align:  center;
-}
-.product_name{
-  width: 100%;
-  text-align:  center;
-
-}
-.product_name p{
-  font-size: 1.25em;
-}
-.product_order{
-  display: flex;
-}
-.product_order_btn{
-  width: 90px;
-  height: 30px;
-}
-.product_order_price{
-  font-size: 1.5em;
-  margin-right: 10px;
+.menu {
 }
