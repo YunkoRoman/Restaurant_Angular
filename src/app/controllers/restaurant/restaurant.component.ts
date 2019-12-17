@@ -86,25 +86,30 @@ export class RestaurantComponent implements OnInit {
   }
 
   addToCard(Product) {
-    console.log(Product);
-    console.log('*****************************************')
-    console.log(this.basket);
-    console.log('*****************************************')
-    this.orderList.push(Product);
-    console.log('*****************************************')
-    console.log(this.orderList);
-    if (localStorage.getItem('basket') != undefined || null) {
-      this.basket = JSON.parse(localStorage.getItem('basket'));
-      this.basket.forEach(function (item) {
-        if (item.product_id == Product.id) {
-          ++item.quantity;
-        }
-      })
-    } else {
+
+    if (!localStorage.getItem('basket')) {
       this.basket.push({
         product_id: Product.id,
         quantity: 1
       });
+      localStorage.setItem('basket', JSON.stringify(this.basket));
+    }
+
+    if (localStorage.getItem('basket')) {
+      let newItem = true;
+      this.basket.forEach(function (item) {
+        if (item.product_id == Product.id) {
+          ++item.quantity;
+          newItem = false;
+        }
+      });
+      if (newItem) {
+        this.basket.push({
+          product_id: Product.id,
+          quantity: 1
+        })
+      }
+
       localStorage.setItem('basket', JSON.stringify(this.basket));
     }
 
