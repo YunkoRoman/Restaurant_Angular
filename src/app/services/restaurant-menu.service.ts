@@ -9,11 +9,16 @@ export class RestaurantMenuService {
   constructor(public http: HttpClient) {
   }
 
-  UploadMenu(id) {
-    return this.http.get('http://localhost:3000/restaurants/' + id)
-  }
 
-  UploadProduuct(id) {
+
+  UploadProduct(id) {
     return this.http.get('http://localhost:3000/restaurants/product/' + id)
   }
+  RestaurantInfo(id) {
+    return this.http.get('http://localhost:3000/restaurants/info/'+ id)
+  }
+  GetMenus(id) {
+    return this.http.get('http://localhost:3000/restaurants/menu/' + id)
+  }
+
 }

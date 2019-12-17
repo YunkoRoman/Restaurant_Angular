@@ -3,12 +3,12 @@
 </div>
 <div class="restaurant_box">
   <div class="box">
-    <a  class="box_child" *ngFor="let list of restaurantList" [routerLink]="['restaurant/'+ list.id]">
-      <div class="box_photo">Картинка</div>
+    <a  class="box_child" *ngFor="let restaurant of restaurantList" [routerLink]="['restaurant/'+ restaurant.id]">
+      <div class="box_photo"><img [src]="restaurant.path_to_img" alt=""></div>
       <div class="box_description">
         <div class="box_description_children">
-          <h1 class="box_description_children_name"><a>{{list.name}}</a></h1>
-          <!--<p class="box_description_children_description">{{list.description}}</p>-->
+          <h1 class="box_description_children_name"><a>{{restaurant.name}}</a></h1>
+          <p class="box_description_children_description">{{restaurant.description}}</p>
         </div>
       </div>
     </a>

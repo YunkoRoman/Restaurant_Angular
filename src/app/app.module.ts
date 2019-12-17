@@ -1,32 +1,39 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import { AuthComponent } from './controllers/auth/auth.component';
+import {AuthComponent} from './controllers/auth/auth.component';
 import {RouterModule, Routes} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import { RegistrationComponent } from './controllers/registration/registration.component';
-import { CheckedComponent } from './controllers/checked/checked.component';
+import {RegistrationComponent} from './controllers/registration/registration.component';
+import {CheckedComponent} from './controllers/checked/checked.component';
 import {HttpAuthInterceptor} from "./interceptor/auth.interceptor";
-import { ListRestaurantsComponent } from './controllers/list-restaurants/list-restaurants.component';
-import { RestaurantComponent } from './controllers/restaurant/restaurant.component';
-import { BasketComponent } from './controllers/basket/basket.component';
-import { SendToEmailComponent } from './controllers/send-to-email/send-to-email.component';
-
+import {ListRestaurantsComponent} from './controllers/list-restaurants/list-restaurants.component';
+import {RestaurantComponent} from './controllers/restaurant/restaurant.component';
+import {BasketComponent} from './controllers/basket/basket.component';
+import {SendToEmailComponent} from './controllers/send-to-email/send-to-email.component';
+import {ProductsComponent} from './controllers/products/products.component';
 
 
 const routes: Routes = [
-  {path:'', component: ListRestaurantsComponent},
-  {path:'login', component: AuthComponent},
-  {path:'registration', component: RegistrationComponent},
-  {path:'user/checked', component: CheckedComponent},
-  {path:'restaurant/:id', component: RestaurantComponent},
-  {path:'email', component: SendToEmailComponent},
-  {path:'basket', component: BasketComponent},
-] ;
+  {path: '', component: ListRestaurantsComponent},
+  {path: 'login', component: AuthComponent},
+  {path: 'registration', component: RegistrationComponent},
+  {path: 'user/checked', component: CheckedComponent},
+  {
+    path: 'restaurant/:id', component: RestaurantComponent,
+    children: [{
+      path: 'menu/:id', component: ProductsComponent
+    }]
+  },
+  {path: 'email', component: SendToEmailComponent},
+
+  {path: 'basket', component: BasketComponent},
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +43,8 @@ const routes: Routes = [
     ListRestaurantsComponent,
     RestaurantComponent,
     BasketComponent,
-    SendToEmailComponent
+    SendToEmailComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +54,8 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true }],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

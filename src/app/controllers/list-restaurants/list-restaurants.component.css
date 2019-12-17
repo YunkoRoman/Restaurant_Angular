@@ -43,10 +43,10 @@
   transform: scale(1.05);
   transition: 0.3s;
 }
-.box_photo{
+.box_photo img{
   width: 100%;
   height: 170px;
-  background-color: #fff85c;
+
 }
 .box_description{
   width: 100%;
@@ -56,7 +56,7 @@
 }
 .box_description_children_name {
   margin: 20px;
-  font-size: x-large;
+  font-size: xx-large;
   font-weight: bold;
 }
 /*.box_description_children_description{*/
@@ -68,3 +68,9 @@
   color: #404040;
 }
 
+.box_description_children_description {
+  margin: 20px;
+  font-size: large;
+  font-weight: bold;
+  color: #404040;
+}

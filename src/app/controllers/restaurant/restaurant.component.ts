@@ -3,8 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {Response} from "../../interfaces/Response";
 import {RestaurantMenuService} from "../../services/restaurant-menu.service";
 import {BasketService} from "../../services/basket.service";
-import {JSON_CONFIG_FILENAME} from "tslint/lib/configuration";
-import {type} from "os";
+import {ProductService} from "../../services/product.service";
+
 
 @Component({
   selector: 'app-restaurant',
@@ -12,60 +12,101 @@ import {type} from "os";
   styleUrls: ['./restaurant.component.css']
 })
 export class RestaurantComponent implements OnInit {
-  public restaurant_id: number;
-  public menus: any = [];
-  public productsObj: any = [];
-  public showBlock: boolean = false;
-  public restaurantName: string;
-  public basket: object = {};
-  public headImg = require('../../assets/head_img.jpg');
+  private restaurant_id: number;
+  private productsId: any = [];
+  private orderList: any = [];
+  private menuObj: any = [];
+  private restaurantInfo: any = [];
+  private basket: any = [];
+  private showMenu: boolean = true;
+  private showProducts: boolean = false;
 
 
   constructor(private route: ActivatedRoute,
               private RestaurantMenuService: RestaurantMenuService,
-              private BasketService: BasketService) {
+              private ProductService: ProductService) {
   }
 
+
   ngOnInit() {
+    this.CheckBasket();
+
     this.route.params
       .subscribe(params => {
         this.restaurant_id = params.id;
       });
-    this.RestaurantMenuService.UploadMenu(this.restaurant_id).subscribe((data: Response) => {
-      this.menus = data.msg;
-      console.log(data.msg);
-      const arr = data.msg;
-      arr.forEach(e => {
-        this.restaurantName = e.restaurant.name;
-      });
+
+    this.RestaurantMenuService.RestaurantInfo(this.restaurant_id).subscribe((data: Response) => {
+      this.restaurantInfo = data.msg[0];
+      console.log(data.msg[0]);
     });
-    this.CheckBasket()
+
+    this.RestaurantMenuService.GetMenus(this.restaurant_id).subscribe((data: Response) => {
+      this.menuObj = data.msg;
+    });
+    this.GetProduct()
+
   }
+
 
   CheckBasket() {
-    if (localStorage.getItem('basket') != null)
-      this.basket = JSON.parse(localStorage.getItem('basket') )
-  }
-
-  Buy(product_id) {
-    const Product_id = Number(product_id);
-
-    if (this.basket[Product_id] != undefined) {
-      this.basket[Product_id]++
-    } else {
-      this.basket[Product_id] = 1
+    if (localStorage.getItem('basket') != undefined || null) {
+      this.basket = JSON.parse(localStorage.getItem('basket'))
     }
-    localStorage.setItem('basket', JSON.stringify(this.basket));
+  }
+
+  // Get product for basket
+  GetProduct() {
+
+    if (localStorage.getItem('basket') != undefined || null) {
+
+      this.basket = JSON.parse(localStorage.getItem('basket'));
+
+      const id = Object.keys(this.basket);
+
+      id.map(e => {
+        const product_id = Number(e);
+        this.productsId.push(product_id)
+      });
+
+      console.log(this.orderList);
+      console.log(this.productsId);
+      this.ProductService.OrderProduct(this.productsId, this.restaurant_id).subscribe((data: Response) => {
+        this.orderList = data.msg
+      })
+    }
 
   }
 
-  UploadProduct(menu_id) {
-    this.RestaurantMenuService.UploadProduuct(menu_id).subscribe((data: Response) => {
-      this.productsObj = data.msg;
-      console.log(data.msg);
-      if (data.success === true) this.showBlock = true;
+  // Show products component
 
-    })
+  GetProducts(id: number) {
+    this.showProducts = !this.showProducts;
+    this.showMenu = !this.showMenu
   }
 
+  addToCard(Product) {
+    console.log(Product);
+    console.log('*****************************************')
+    console.log(this.basket);
+    console.log('*****************************************')
+    this.orderList.push(Product);
+    console.log('*****************************************')
+    console.log(this.orderList);
+    if (localStorage.getItem('basket') != undefined || null) {
+      this.basket = JSON.parse(localStorage.getItem('basket'));
+      this.basket.forEach(function (item) {
+        if (item.product_id == Product.id) {
+          ++item.quantity;
+        }
+      })
+    } else {
+      this.basket.push({
+        product_id: Product.id,
+        quantity: 1
+      });
+      localStorage.setItem('basket', JSON.stringify(this.basket));
+    }
+
+  }
 }

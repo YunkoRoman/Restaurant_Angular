@@ -1,15 +1,31 @@
 <div class="res_head_img">
-  <img [src]="headImg" alt="" width="100%" height="400px">
+  <img [src]="restaurantInfo.path_to_img" alt="" width="100%" height="400px">
 </div>
-<div class="name_and_basket_box">
-  <div class="big_description_box">
-    <p class="res_name">{{restaurantName }}</p>
+<div class="general_box">
+  <div>
+    <div class="big_description_box">
+      <p class="res_name">{{restaurantInfo.name }} </p>
+    </div>
+
+    <div class="menu_box" *ngIf="showMenu" >
+      <div *ngFor="let menu of menuObj">
+        <a [routerLink]="['menu/'+ menu.id]" class="box_child_menu" (click)="GetProducts(menu.id)">
+          {{menu.name}}
+        </a>
+      </div>
+    </div>
+    <app-products *ngIf="showProducts" (onChanged)="addToCard($event)"></app-products>
   </div>
-  <div class="basket_card">
-    <p class="res_name"> Ваше замовлення в {{restaurantName}}</p>
+  <div>
+    <div class="basket_card">
+      <p class="res_name"> Ваше замовлення в {{restaurantInfo.name}}</p>
+      <!--<div class="basket_card_list" *ngFor="let product of orderList">-->
+        <!--&lt;!&ndash;<p>{{product.name}}</p>&ndash;&gt;-->
+      <!--</div>-->
+    </div>
   </div>
+
 </div>
-<div class="menu"></div>
 
 
 <!--<div class="big_menu_box">-->
