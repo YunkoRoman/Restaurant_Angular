@@ -1,0 +1,29 @@
+<nav class="menu_navigate">
+  <div class="navigate_tape">
+    <div *ngFor="let menu of menusArr" class="navigate_tape_link">
+      <a [routerLink]="['menu/'+ menu.id]" class="navigate_tape_name" (click)="newProduct(menu.id)">{{menu.name}}</a>
+    </div>
+  </div>
+</nav>
+<div class="product_box">
+  <div style="width: 100%; display: flex; flex-wrap: wrap">
+    <div class="product_box_child" *ngFor="let product of productArr">
+      <div class="product_box_photo"></div>
+      <div class="product_footer_box">
+        <div class="product_decr_box">
+          <p class="product_decr_box_name">{{product.name}}</p>
+        </div>
+        <div class="product_order_box">
+          <button class="product_order_box_btn" (click)="AddToCard(product)">Add to card</button>
+          <!--<div class="product_order_box_btn">-->
+            <!--<button>+</button>-->
+            <!--<input type="number" class="product_order_box_input"  >-->
+            <!--<button>-</button>-->
+          <!--</div>-->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
