@@ -1,4 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  OnDestroy,
+  AfterViewChecked
+} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Response} from "../../interfaces/Response";
 import {RestaurantMenuService} from "../../services/restaurant-menu.service";
@@ -20,6 +28,7 @@ export class RestaurantComponent implements OnInit {
   private basket: any = [];
   private showMenu: boolean = true;
   private showProducts: boolean = false;
+  private orderChecRes: boolean = true;
 
 
   constructor(private route: ActivatedRoute,
@@ -43,8 +52,10 @@ export class RestaurantComponent implements OnInit {
 
     this.RestaurantMenuService.GetMenus(this.restaurant_id).subscribe((data: Response) => {
       this.menuObj = data.msg;
+      console.log(data.msg);
     });
     this.GetProduct()
+
 
   }
 
@@ -62,39 +73,43 @@ export class RestaurantComponent implements OnInit {
 
       this.basket = JSON.parse(localStorage.getItem('basket'));
 
-      const id = Object.keys(this.basket);
-
-      id.map(e => {
-        const product_id = Number(e);
+      console.log(this.basket);
+      this.basket.map(p => {
+        const product_id = Number(p.product_id);
         this.productsId.push(product_id)
       });
 
-      console.log(this.orderList);
-      console.log(this.productsId);
       this.ProductService.OrderProduct(this.productsId, this.restaurant_id).subscribe((data: Response) => {
-        this.orderList = data.msg
-      })
-    }
+        if (data.msg !== null || undefined) {
 
+          data.msg.forEach(e => {
+            if (e !== null || undefined) {
+              this.orderList.push(e)
+            }
+          })
+        }
+
+        // it is Function which Add quantity to Product Object
+
+        if (this.orderList && this.basket !== null || undefined) {
+          this.AddQttToProductObj(this.orderList, this.basket)
+        }
+      })
+
+
+    }
   }
 
   // Show products component
 
-  GetProducts(id: number) {
+  ShowProduct() {
     this.showProducts = !this.showProducts;
     this.showMenu = !this.showMenu
   }
 
   addToCard(Product) {
 
-    if (!localStorage.getItem('basket')) {
-      this.basket.push({
-        product_id: Product.id,
-        quantity: 1
-      });
-      localStorage.setItem('basket', JSON.stringify(this.basket));
-    }
-
+    this.CheckOrderList(Product);
     if (localStorage.getItem('basket')) {
       let newItem = true;
       this.basket.forEach(function (item) {
@@ -113,5 +128,39 @@ export class RestaurantComponent implements OnInit {
       localStorage.setItem('basket', JSON.stringify(this.basket));
     }
 
+    if (!localStorage.getItem('basket')) {
+      this.basket.push({
+        product_id: Product.id,
+        quantity: 1
+      });
+      localStorage.setItem('basket', JSON.stringify(this.basket));
+    }
+
+
+    this.AddQttToProductObj(this.orderList, this.basket)
+  }
+
+  AddQttToProductObj(ProductArr, ProdBasketArr) {
+
+    ProductArr.forEach(prodObj => {
+      ProdBasketArr.forEach(prodBaskObj => {
+        if (prodObj.id == prodBaskObj.product_id) {
+          prodObj['qtt'] = prodBaskObj.quantity
+        }
+      })
+    });
+    console.log(ProductArr);
+  }
+
+  CheckOrderList(Product) {
+    const result = this.orderList.find(e => e.id === Product.id);
+    if (result == undefined || null) {
+      this.orderList.push(Product)
+    }
+  }
+
+  deleteBtn(id: number) {
+
   }
 }
+

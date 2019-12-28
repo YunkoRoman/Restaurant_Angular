@@ -50,8 +50,8 @@ export class ProductsComponent implements OnInit {
     })
   }
 
-  AddToCard(product_id) {
-    this.onChanged.emit(product_id)
+  AddToCard(product) {
+    this.onChanged.emit(product)
   }
 
 }

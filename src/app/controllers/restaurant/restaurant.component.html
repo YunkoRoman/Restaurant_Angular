@@ -9,7 +9,7 @@
 
     <div class="menu_box" *ngIf="showMenu" >
       <div *ngFor="let menu of menuObj">
-        <a [routerLink]="['menu/'+ menu.id]" class="box_child_menu" (click)="GetProducts(menu.id)">
+        <a [routerLink]="['menu/'+ menu.id]" class="box_child_menu" (click)="ShowProduct(menu.id)">
           {{menu.name}}
         </a>
       </div>
@@ -19,33 +19,14 @@
   <div>
     <div class="basket_card">
       <p class="res_name"> Ваше замовлення в {{restaurantInfo.name}}</p>
-      <!--<div class="basket_card_list" *ngFor="let product of orderList">-->
-        <!--&lt;!&ndash;<p>{{product.name}}</p>&ndash;&gt;-->
-      <!--</div>-->
+      <div class="basket_card_list" *ngFor="let product of orderList">
+        <p>{{product.name}}</p>
+        <p>{{product.qtt}}</p>
+        <button (click)="deleteBtn(product.id)">Delete</button>
+      </div>
     </div>
   </div>
 
 </div>
 
 
-<!--<div class="big_menu_box">-->
-<!--<div *ngFor="let menu of menus" class="menu_name_box">-->
-<!--<button class="menu_button" (click)="UploadProduct(menu.id)">-->
-<!--<p>{{menu.name}}</p>-->
-<!--</button>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="products_box">-->
-<!--<div [class]="showBlock" *ngFor="let products of productsObj">-->
-<!--<div class="products_childerns_box">-->
-<!--<div class="product_photo"><p>Тут буде картинка</p></div>-->
-<!--<div class="product_name"><p>{{products.product.name}}</p></div>-->
-<!--<div class="product_order">-->
-<!--<div class="product_order_price">{{products.product.price}} грн</div>-->
-<!--<button (click)="Buy(products.product.id,products.product.price )" class="product_order_btn">-->
-<!--<p>Замовити</p>-->
-<!--</button>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
