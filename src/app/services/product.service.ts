@@ -12,7 +12,4 @@ export class ProductService {
   GetProduct(menu_id) {
     return this.http.get('http://localhost:3000/restaurants/products/' + menu_id)
   }
-  OrderProduct(products_id, restaurant_id: number) {
-    return this.http.post('http://localhost:3000/order/' , [products_id, restaurant_id])
-  }
 }

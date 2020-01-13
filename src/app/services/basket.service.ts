@@ -21,11 +21,6 @@ export class BasketService {
   readProduct(MassiveProduct_id) {
     return this.http.post('http://localhost:3000/basket', MassiveProduct_id)
   }
-
-
-  deleteProduct(id) {
-    return this.http.delete('http://localhost:3000/basket/'+id )
-  }
   sendOrder(id) {
     return this.http.post('http://localhost:3000/basket/order', id )
   }

@@ -16,6 +16,7 @@ import {RestaurantComponent} from './controllers/restaurant/restaurant.component
 import {BasketComponent} from './controllers/basket/basket.component';
 import {SendToEmailComponent} from './controllers/send-to-email/send-to-email.component';
 import {ProductsComponent} from './controllers/products/products.component';
+import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 
 
 const routes: Routes = [
@@ -33,6 +34,8 @@ const routes: Routes = [
 
   {path: 'basket', component: BasketComponent},
 ];
+
+const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
 
 @NgModule({
   declarations: [
@@ -52,7 +55,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

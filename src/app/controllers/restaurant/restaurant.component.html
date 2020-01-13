@@ -7,7 +7,7 @@
       <p class="res_name">{{restaurantInfo.name }} </p>
     </div>
 
-    <div class="menu_box" *ngIf="showMenu" >
+    <div class="menu_box" *ngIf="showMenu">
       <div *ngFor="let menu of menuObj">
         <a [routerLink]="['menu/'+ menu.id]" class="box_child_menu" (click)="ShowProduct(menu.id)">
           {{menu.name}}
@@ -21,8 +21,17 @@
       <p class="res_name"> Ваше замовлення в {{restaurantInfo.name}}</p>
       <div class="basket_card_list" *ngFor="let product of orderList">
         <p>{{product.name}}</p>
-        <p>{{product.qtt}}</p>
+        <p>{{product.price }}</p>
+        <button (click)="additionQtt(product.id)">+</button>
+        <form [formGroup]="nameForm">
+          <input formControlName="quantity" [value]="product.qtt" (blur)="changeQtt(product.id)">
+        </form>
+        <button (click)="subtractionQtt(product.id)">-</button>
+        <br>
         <button (click)="deleteBtn(product.id)">Delete</button>
+      </div>
+      <div class="order_box">
+        <button class="order_btn" (click)="SendOrder()"> Send order </button>
       </div>
     </div>
   </div>
