@@ -24,8 +24,7 @@ export class RestaurantComponent implements OnInit {
   private restaurantInfo: any = [];
   private basket: any = [];
   private nameForm: FormGroup;
-  private showMenu: boolean = true;
-  private showProducts: boolean = false;
+
 
 
   constructor(private route: ActivatedRoute,
@@ -57,6 +56,7 @@ export class RestaurantComponent implements OnInit {
 
     this.RestaurantMenuService.GetMenus(this.restaurant_id).subscribe((data: Response) => {
       this.menuObj = data.msg;
+      console.log(data.msg);
 
     });
     this.GetProduct();
@@ -76,7 +76,7 @@ export class RestaurantComponent implements OnInit {
 
     if (localStorage.getItem('basket') != undefined || null) {
 
-      // this.basket = JSON.parse(localStorage.getItem('basket'));
+      this.basket = JSON.parse(localStorage.getItem('basket'));
 
       this.basket.map(p => {
         const product_id = Number(p.product_id);
@@ -104,15 +104,10 @@ export class RestaurantComponent implements OnInit {
     }
   }
 
-  // Show products component
 
-  ShowProduct() {
-    this.showProducts = !this.showProducts;
-    this.showMenu = !this.showMenu
-  }
-
-  addToCard(Product) {
-
+  addToCard(product) {
+    const Product = Object.assign({}, product);
+    console.log(Product);
     this.CheckOrderList(Product);
     if (localStorage.getItem('basket')) {
       let newItem = true;
@@ -192,7 +187,7 @@ export class RestaurantComponent implements OnInit {
         ++obj.qtt;
         obj.price = obj.qtt * basketObj.price
       }
-
+      console.log(this.menuObj);
     });
 
   }

@@ -7,14 +7,22 @@
       <p class="res_name">{{restaurantInfo.name }} </p>
     </div>
 
-    <div class="menu_box" *ngIf="showMenu">
-      <div *ngFor="let menu of menuObj">
-        <a [routerLink]="['menu/'+ menu.id]" class="box_child_menu" (click)="ShowProduct(menu.id)">
+    <div class="products_box">
+      <div *ngFor="let menu of menuObj" class="menu_box">
+        <p class="box_child_menu">
           {{menu.name}}
-        </a>
+        </p>
+        <div class="product_box_all">
+          <div *ngFor="let prod of menu.products" class="product_box_description">
+            <div class="product_img"></div>
+            <p class="product_name">{{prod.name}}</p>
+            <p class="product_price"> {{prod.price}}</p>
+            <button (click)="addToCard(prod)">Add to card</button>
+          </div>
+        </div>
       </div>
     </div>
-    <app-products *ngIf="showProducts" (onChanged)="addToCard($event)"></app-products>
+    <!--<app-products *ngIf="showProducts" (onChanged)="addToCard($event)"></app-products>-->
   </div>
   <div>
     <div class="basket_card">
@@ -31,7 +39,7 @@
         <button (click)="deleteBtn(product.id)">Delete</button>
       </div>
       <div class="order_box">
-        <button class="order_btn" (click)="SendOrder()"> Send order </button>
+        <button class="order_btn" (click)="SendOrder()"> Send order</button>
       </div>
     </div>
   </div>
