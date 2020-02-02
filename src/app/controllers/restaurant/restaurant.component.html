@@ -38,6 +38,9 @@
         <br>
         <button (click)="deleteBtn(product.id)">Delete</button>
       </div>
+      <div class="basket_total_price">
+        <p>Total Price: {{totalPrice}}</p>
+      </div>
       <div class="order_box">
         <button class="order_btn" (click)="SendOrder()"> Send order</button>
       </div>

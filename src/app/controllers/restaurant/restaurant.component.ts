@@ -24,7 +24,8 @@ export class RestaurantComponent implements OnInit {
   private restaurantInfo: any = [];
   private basket: any = [];
   private nameForm: FormGroup;
-
+  private priceArr: any = [];
+  private totalPrice: number;
 
 
   constructor(private route: ActivatedRoute,
@@ -64,11 +65,21 @@ export class RestaurantComponent implements OnInit {
 
   }
 
+  CalculatesTotalPrice() {
+    this.priceArr = [];
+    this.basket.forEach(e => {
+      this.priceArr.push(e.quantity * e.price);
+      console.log(this.priceArr);
+    });
+    this.totalPrice = this.priceArr.reduce((acc, curVal) => acc + curVal);
+  }
 
   CheckBasket() {
     if (localStorage.getItem('basket') != undefined || null) {
       this.basket = JSON.parse(localStorage.getItem('basket'))
+      this.CalculatesTotalPrice()
     }
+
   }
 
   // Get product for basket
@@ -137,6 +148,7 @@ export class RestaurantComponent implements OnInit {
       localStorage.setItem('basket', JSON.stringify(this.basket));
     }
 
+    this.CalculatesTotalPrice();
 
     this.AddQttToProductObj(this.orderList, this.basket)
   }
@@ -146,8 +158,9 @@ export class RestaurantComponent implements OnInit {
     ProductArr.forEach(prodObj => {
       const prodBaskObj = ProdBasketArr.find(Obj => prodObj.id == Obj.product_id);
       prodObj['qtt'] = prodBaskObj.quantity;
-      prodObj.price = prodBaskObj.quantity * prodBaskObj.price
+      // prodObj.price = prodBaskObj.quantity * prodBaskObj.price
     });
+
   }
 
   CheckOrderList(Product) {
@@ -171,6 +184,7 @@ export class RestaurantComponent implements OnInit {
     });
     const orderIndex = orderValue.indexOf(id);
     this.orderList.splice(orderIndex, 1);
+    this.CalculatesTotalPrice()
   }
 
   additionQtt(id: number) {
@@ -185,10 +199,11 @@ export class RestaurantComponent implements OnInit {
     this.orderList.forEach(obj => {
       if (obj.id == id) {
         ++obj.qtt;
-        obj.price = obj.qtt * basketObj.price
+        // obj.price = obj.qtt * basketObj.price
       }
       console.log(this.menuObj);
     });
+    this.CalculatesTotalPrice()
 
   }
 
@@ -210,11 +225,13 @@ export class RestaurantComponent implements OnInit {
       if (obj.id == id) {
         if (obj.qtt > 1) {
           --obj.qtt;
-          obj.price = obj.qtt * basketObj.price
+          // obj.price = obj.qtt * basketObj.price
         }
       }
     });
+    this.CalculatesTotalPrice()
   }
+
   // Change Qtt in Input via (blur)
   changeQtt(id: number) {
     const quantity = this.nameForm.value.quantity;
@@ -232,7 +249,7 @@ export class RestaurantComponent implements OnInit {
       this.orderList.forEach(obj => {
         if (obj.id == id) {
           obj.qtt = quantity;
-          obj.price = quantity * basketObj.price
+          // obj.price = quantity * basketObj.price
         }
 
       });
@@ -248,15 +265,16 @@ export class RestaurantComponent implements OnInit {
     this.orderList.forEach(obj => {
       if (obj.id == id) {
         obj.qtt = quantity;
-        obj.price = quantity * basketObj.price
+        // obj.price = quantity * basketObj.price
       }
 
     });
+    this.CalculatesTotalPrice()
 
   }
 
   SendOrder() {
-    this.OrderService.SaveOrder(this.orderList, this.restaurant_id).subscribe((data: Response) => {
+    this.OrderService.SaveOrder(this.orderList, this.restaurant_id, this.totalPrice).subscribe((data: Response) => {
       console.log(data.msg);
       if (data.success == true) {
         this.SocketService.sendRestaurantId(this.restaurant_id)

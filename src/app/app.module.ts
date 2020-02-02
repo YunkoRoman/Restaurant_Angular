@@ -24,10 +24,7 @@ const routes: Routes = [
   {path: 'login', component: AuthComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'user/checked', component: CheckedComponent},
-  {
-    path: 'restaurant/:id', component: RestaurantComponent,
-
-  },
+  {path: 'restaurant/:id', component: RestaurantComponent},
   {path: 'email', component: SendToEmailComponent},
 
   {path: 'basket', component: BasketComponent},
