@@ -9,15 +9,20 @@
 
     <div class="products_box">
       <div *ngFor="let menu of menuObj" class="menu_box">
-        <p class="box_child_menu">
+        <p class="menu_box_name">
           {{menu.name}}
         </p>
         <div class="product_box_all">
           <div *ngFor="let prod of menu.products" class="product_box_description">
             <div class="product_img"></div>
             <p class="product_name">{{prod.name}}</p>
-            <p class="product_price"> {{prod.price}}</p>
-            <button (click)="addToCard(prod)">Add to card</button>
+            <div class="product_box_footer">
+              <span class="product_price">
+                <span class="product_price_value"> {{prod.price}}</span>
+                <span class="product_price_valuta"> грн </span>
+              </span>
+              <button class="product_box_btn" (click)="addToCard(prod)">Add to card</button>
+            </div>
           </div>
         </div>
       </div>
@@ -26,17 +31,25 @@
   </div>
   <div>
     <div class="basket_card">
-      <p class="res_name"> Ваше замовлення в {{restaurantInfo.name}}</p>
+      <p class="basket_res_name"> Your order in {{restaurantInfo.name}}</p>
       <div class="basket_card_list" *ngFor="let product of orderList">
-        <p>{{product.name}}</p>
-        <p>{{product.price }}</p>
-        <button (click)="additionQtt(product.id)">+</button>
-        <form [formGroup]="nameForm">
-          <input formControlName="quantity" [value]="product.qtt" (blur)="changeQtt(product.id)">
-        </form>
-        <button (click)="subtractionQtt(product.id)">-</button>
-        <br>
-        <button (click)="deleteBtn(product.id)">Delete</button>
+        <div class="basket_card_description">
+          <span class="basket_product_name">{{product.name}}</span>
+          <span>
+            <span class="basket_product_price_value">{{product.price }}</span>
+            <span class="basket_product_price_valuta"> грн </span>
+          </span>
+        </div>
+        <div class="basket_product_quantity">
+          <div class="basket_product_quantity_opt">
+            <button (click)="subtractionQtt(product.id)">-</button>
+            <form [formGroup]="nameForm">
+              <input formControlName="quantity" [value]="product.qtt" (blur)="changeQtt(product.id)" class="basket_inp">
+            </form>
+            <button (click)="additionQtt(product.id)">+</button>
+          </div>
+          <button (click)="deleteBtn(product.id)">Delete</button>
+        </div>
       </div>
       <div class="basket_total_price">
         <p>Total Price: {{totalPrice}}</p>
