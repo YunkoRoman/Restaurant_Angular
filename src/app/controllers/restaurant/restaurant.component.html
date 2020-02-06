@@ -27,11 +27,12 @@
         </div>
       </div>
     </div>
-    <!--<app-products *ngIf="showProducts" (onChanged)="addToCard($event)"></app-products>-->
+
   </div>
   <div>
     <div class="basket_card">
       <p class="basket_res_name"> Your order in {{restaurantInfo.name}}</p>
+
       <div class="basket_card_list" *ngFor="let product of orderList">
         <div class="basket_card_description">
           <span class="basket_product_name">{{product.name}}</span>
@@ -42,19 +43,28 @@
         </div>
         <div class="basket_product_quantity">
           <div class="basket_product_quantity_opt">
-            <button (click)="subtractionQtt(product.id)">-</button>
-            <form [formGroup]="nameForm">
-              <input formControlName="quantity" [value]="product.qtt" (blur)="changeQtt(product.id)" class="basket_inp">
-            </form>
-            <button (click)="additionQtt(product.id)">+</button>
+            <span (click)="subtractionQtt(product.id)"><img [src]="minusIcon" alt="Minus"></span>
+            <div>
+              <span  class="basket_inp">{{product.qtt}}</span>
+              <!--<form [formGroup]="nameForm">-->
+                <!--<input formControlName="quantity" [value]="product.qtt" (blur)="changeQtt(product.id)"-->
+                       <!--class="basket_inp">-->
+              <!--</form>-->
+            </div>
+            <span (click)="additionQtt(product.id)"><img [src]="plusIcon" alt="Plus"></span>
           </div>
-          <button (click)="deleteBtn(product.id)">Delete</button>
+          <span (click)="deleteBtn(product.id)"><img [src]="deleteIcon" alt="Delete"></span>
         </div>
       </div>
-      <div class="basket_total_price">
-        <p>Total Price: {{totalPrice}}</p>
+      <div *ngIf="showEmptyBasket" class="basket_res_name">Your basket is empty</div>
+      <div class="basket_total_price" *ngIf="showTotalPrice">
+        <p class="basket_total_price_h2">Total Price</p>
+        <div  class="basket_total_price_desc">
+          <span class="basket_total_price_value">{{totalPrice}}</span>
+          <span class="basket_total_price_valute">грн</span>
+        </div>
       </div>
-      <div class="order_box">
+      <div class="make_order" *ngIf="showTotalPrice">
         <button class="order_btn" (click)="SendOrder()"> Send order</button>
       </div>
     </div>

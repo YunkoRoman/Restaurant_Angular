@@ -26,6 +26,11 @@ export class RestaurantComponent implements OnInit {
   private nameForm: FormGroup;
   private priceArr: any = [];
   private totalPrice: number;
+  private showEmptyBasket: boolean;
+  private showTotalPrice: boolean;
+  private plusIcon = require("../../assets/plus 24.png");
+  private minusIcon = require("../../assets/minus 24.png");
+  private deleteIcon = require("../../assets/delete.png");
 
 
   constructor(private route: ActivatedRoute,
@@ -65,21 +70,35 @@ export class RestaurantComponent implements OnInit {
 
   }
 
+  ShowEmptyBasket() {
+    if (this.orderList.length > 0) {
+      this.showEmptyBasket = false;
+      this.showTotalPrice = true
+    }
+    if (this.orderList.length == 0) {
+      this.showEmptyBasket = true;
+      this.showTotalPrice = false;
+    }
+  }
+
   CalculatesTotalPrice() {
     this.priceArr = [];
-    this.basket.forEach(e => {
-      this.priceArr.push(e.quantity * e.price);
-      console.log(this.priceArr);
+    this.orderList.forEach(a => {
+      if (a.id !== null || undefined) {
+        this.basket.forEach(e => {
+          if (a.id == e.product_id) {
+            this.priceArr.push(e.quantity * e.price);
+          }
+        });
+      }
     });
-    this.totalPrice = this.priceArr.reduce((acc, curVal) => acc + curVal);
+    if (this.priceArr.length != 0) this.totalPrice = this.priceArr.reduce((acc, curVal) => acc + curVal);
   }
 
   CheckBasket() {
     if (localStorage.getItem('basket') != undefined || null) {
       this.basket = JSON.parse(localStorage.getItem('basket'))
-      this.CalculatesTotalPrice()
     }
-
   }
 
   // Get product for basket
@@ -107,12 +126,14 @@ export class RestaurantComponent implements OnInit {
         // it is Function which Add quantity to Product Object
 
         if (this.orderList && this.basket !== null || undefined) {
-          this.AddQttToProductObj(this.orderList, this.basket)
+          this.AddQttToProductObj(this.orderList, this.basket);
+          this.CalculatesTotalPrice()
         }
       })
 
 
     }
+    this.ShowEmptyBasket()
   }
 
 
@@ -150,7 +171,9 @@ export class RestaurantComponent implements OnInit {
 
     this.CalculatesTotalPrice();
 
-    this.AddQttToProductObj(this.orderList, this.basket)
+    this.AddQttToProductObj(this.orderList, this.basket);
+
+    this.ShowEmptyBasket()
   }
 
   AddQttToProductObj(ProductArr, ProdBasketArr) {
@@ -171,6 +194,7 @@ export class RestaurantComponent implements OnInit {
   }
 
   // Button to delete product with the card list
+
   deleteBtn(id: number) {
     const value = this.basket.map(obj => {
       return obj.product_id
@@ -179,16 +203,17 @@ export class RestaurantComponent implements OnInit {
     this.basket.splice(index, 1);
     localStorage.setItem('basket', JSON.stringify(this.basket));
 
-    const orderValue = this.orderList.map(obj => {
+    const listValue = this.orderList.map(obj => {
       return obj.id
     });
-    const orderIndex = orderValue.indexOf(id);
+    const orderIndex = listValue.indexOf(id);
     this.orderList.splice(orderIndex, 1);
-    this.CalculatesTotalPrice()
+    this.CalculatesTotalPrice();
+    this.ShowEmptyBasket()
   }
 
   additionQtt(id: number) {
-    const basketObj = this.basket.find(e => e.product_id == id);
+
     this.basket.forEach(obj => {
       if (obj.product_id == id) {
         ++obj.quantity
@@ -208,7 +233,7 @@ export class RestaurantComponent implements OnInit {
   }
 
   subtractionQtt(id: number) {
-    const basketObj = this.basket.find(e => e.product_id == id);
+
     this.basket.forEach(obj => {
       if (obj.product_id == id) {
         if (obj.quantity > 1) {
@@ -229,49 +254,49 @@ export class RestaurantComponent implements OnInit {
         }
       }
     });
-    this.CalculatesTotalPrice()
+    this.CalculatesTotalPrice();
+    this.ShowEmptyBasket()
   }
 
   // Change Qtt in Input via (blur)
-  changeQtt(id: number) {
-    const quantity = this.nameForm.value.quantity;
-    if (quantity == 0 || quantity < 1) {
-      this.deleteBtn(id)
-    } else {
-      const basketObj = this.basket.find(e => e.product_id == id);
-      this.basket.forEach(obj => {
-        if (obj.product_id == id) {
-          obj.quantity = quantity
-        }
-      });
-      localStorage.setItem('basket', JSON.stringify(this.basket));
-
-      this.orderList.forEach(obj => {
-        if (obj.id == id) {
-          obj.qtt = quantity;
-          // obj.price = quantity * basketObj.price
-        }
-
-      });
-    }
-    const basketObj = this.basket.find(e => e.product_id == id);
-    this.basket.forEach(obj => {
-      if (obj.product_id == id) {
-        obj.quantity = quantity
-      }
-    });
-    localStorage.setItem('basket', JSON.stringify(this.basket));
-
-    this.orderList.forEach(obj => {
-      if (obj.id == id) {
-        obj.qtt = quantity;
-        // obj.price = quantity * basketObj.price
-      }
-
-    });
-    this.CalculatesTotalPrice()
-
-  }
+  // changeQtt(id: number) {
+  //   let quantity = this.nameForm.value.quantity;
+  //
+  //   if (quantity == 0 || quantity < 1) {
+  //
+  //     this.basket.forEach(obj => {
+  //       if (obj.product_id == id) {
+  //         obj.quantity = 1
+  //       }
+  //     });
+  //     localStorage.setItem('basket', JSON.stringify(this.basket));
+  //
+  //     this.orderList.forEach(obj => {
+  //
+  //       if (obj.id == id) {
+  //         obj.qtt = 1;
+  //       }
+  //     });
+  //   } else {
+  //
+  //     this.basket.forEach(obj => {
+  //       if (obj.product_id == id) {
+  //         obj.quantity = quantity
+  //       }
+  //     });
+  //     localStorage.setItem('basket', JSON.stringify(this.basket));
+  //
+  //     this.orderList.forEach(obj => {
+  //
+  //       if (obj.id == id) {
+  //         obj.qtt = quantity;
+  //
+  //       }
+  //     });
+  //   }
+  //   this.CalculatesTotalPrice()
+  //
+  // }
 
   SendOrder() {
     this.OrderService.SaveOrder(this.orderList, this.restaurant_id, this.totalPrice).subscribe((data: Response) => {

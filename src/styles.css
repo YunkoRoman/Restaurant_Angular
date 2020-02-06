@@ -147,5 +147,18 @@ button {
     считают, что необходимо оставлять стрелочный вид для кнопок */
   cursor: pointer;
 }
+textarea:focus, input:focus{
+  outline: none;
+}
+input {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+
+}
+.no-outline:focus {
+  outline: none;
+}
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
