@@ -9,6 +9,6 @@ export class AuthService {
   constructor(public http: HttpClient) { }
 
   loginUser(email, password) {
-    return this.http.post('http://localhost:3000/user/auth', {email, password});
+    return this.http.post('http://localhost:3000/auth', {email, password});
   }
 }

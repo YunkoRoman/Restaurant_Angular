@@ -15,8 +15,10 @@ import {ListRestaurantsComponent} from './controllers/list-restaurants/list-rest
 import {RestaurantComponent} from './controllers/restaurant/restaurant.component';
 import {BasketComponent} from './controllers/basket/basket.component';
 import {SendToEmailComponent} from './controllers/send-to-email/send-to-email.component';
-// import {ProductsComponent} from './controllers/products/products.component';
+
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
+import {UserComponentComponent} from './controllers/user-component/user-component.component';
+import {OrdersHistoryComponent} from './controllers/user-component/orders-history/orders-history.component';
 
 
 const routes: Routes = [
@@ -26,8 +28,13 @@ const routes: Routes = [
   {path: 'user/checked', component: CheckedComponent},
   {path: 'restaurant/:id', component: RestaurantComponent},
   {path: 'email', component: SendToEmailComponent},
-
   {path: 'basket', component: BasketComponent},
+  {
+    path: 'user', component: UserComponentComponent, children: [{
+      path: 'history',
+      component: OrdersHistoryComponent
+    }]
+  },
 ];
 
 const config: SocketIoConfig = {url: 'http://localhost:4444', options: {}};
@@ -42,6 +49,8 @@ const config: SocketIoConfig = {url: 'http://localhost:4444', options: {}};
     RestaurantComponent,
     BasketComponent,
     SendToEmailComponent,
+    UserComponentComponent,
+    OrdersHistoryComponent,
   ],
   imports: [
     BrowserModule,

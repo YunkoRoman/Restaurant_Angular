@@ -9,9 +9,9 @@ export class RegistrationService {
   constructor(public http: HttpClient) { }
 
   RegistrUser(name, surname, email, password) {
-    return this.http.post('http://localhost:3000/user/registration', {name, surname, email, password});
+    return this.http.post('http://localhost:3000/register', {name, surname, email, password});
   };
   CheckedUser(token){
-    return this.http.post('http://localhost:3000/user/checked', {token})
+    return this.http.post('http://localhost:3000/register/checked', {token})
   };
 }

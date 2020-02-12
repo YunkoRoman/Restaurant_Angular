@@ -12,8 +12,8 @@
         <button routerLink="login" type="button" class="btn btn-outline-success">Увійти</button>
       </div>
     </div>
-    <div class="icon" *ngIf="visioIcon">
-      <a routerLink=""> <img [src]="icon" alt=""></a>
+    <div class="icon"  *ngIf="visioIcon">
+      <a routerLink="user" routerLinkActive="active"> <img [src]="icon" alt=""></a>
       <button (click)="exiteBtn()" routerLink="">Вихід</button>
     </div>
   </div>
