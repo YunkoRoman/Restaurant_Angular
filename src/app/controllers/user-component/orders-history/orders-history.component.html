@@ -1,1 +1,21 @@
-<p>orders-history works!</p>
+<div class="history_box">
+  <div class="history_box_item shadow_box" *ngFor="let order of orders ">
+    <div class="general_information">
+      <p class="h1">Restaurant name:</p>
+      <p class="h2">{{order.restaurant.name}}</p>
+      <p class="h1">Total price: </p>
+      <div class="general_information_price">
+        <p class="product_price_value">{{order.total_price}}</p>
+        <p class="product_price_valuta">грн</p>
+      </div>
+    </div>
+    <div class="history_box_products">
+      <div class="history_box_prod_item" *ngFor="let item of order.order_lines">
+        <div class="prod_img"></div>
+        <div class="prod_inform">
+          <p class="prod_name">{{item.product.name}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

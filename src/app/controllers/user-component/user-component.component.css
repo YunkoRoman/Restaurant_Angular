@@ -4,9 +4,7 @@
   display: flex;
   margin-top: 35px;
 }
-.shadow_box{
-  box-shadow: 0 0 7px rgba(0, 0, 0, 0.7);
-}
+
 
 .user_info {
   width: 28%;
@@ -15,7 +13,7 @@
 
 .user_general_info {
   width: 72%;
-  border: 1px solid green;
+
 }
 
 .user_info_photo {
@@ -46,8 +44,11 @@
 }
 
 .item_name {
+  display: block;
+  width: 100%;
   color: #365472;
   text-decoration: underline;
+  margin-bottom: 20px;
 }
 .item_name:hover{
   color: #ff3a44;

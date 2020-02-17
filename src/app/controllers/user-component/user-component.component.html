@@ -1,12 +1,13 @@
 <div class="user_page">
   <div class=" user_info">
     <div class="user_info_photo shadow_box">
-      <div class="photo"><img [src]="defaultPhoto" [alt]="'Photo'"></div>
+      <div class="photo"><img [src]="defaultPhoto" alt="'Photo'"></div>
       <div class="user_info_name"></div>
     </div>
     <div class="user_info_menu shadow_box">
       <div class="user_info_menu_item">
         <a  [routerLink]="['history']" class="item_name">Orders history</a>
+        <a  [routerLink]="['statistics']" class="item_name">Statistics</a>
       </div>
     </div>
   </div>

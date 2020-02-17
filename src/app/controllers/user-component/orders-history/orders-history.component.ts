@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Response} from "../../../interfaces/Response";
+import {UserService} from "../../../services/user.service";
+
 
 @Component({
   selector: 'app-orders-history',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersHistoryComponent implements OnInit {
 
-  constructor() { }
+  private orders: any = [];
+
+  constructor(public UserService: UserService) {
+  }
 
   ngOnInit() {
+
+    this.UserService.UserOrders().subscribe((data: Response) => {
+      this.orders = data.msg;
+      console.log(this.orders);
+    })
   }
 
 }

@@ -19,6 +19,7 @@ import {SendToEmailComponent} from './controllers/send-to-email/send-to-email.co
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 import {UserComponentComponent} from './controllers/user-component/user-component.component';
 import {OrdersHistoryComponent} from './controllers/user-component/orders-history/orders-history.component';
+import {StatisticsComponent} from './controllers/user-component/statistics/statistics.component';
 
 
 const routes: Routes = [
@@ -30,10 +31,15 @@ const routes: Routes = [
   {path: 'email', component: SendToEmailComponent},
   {path: 'basket', component: BasketComponent},
   {
-    path: 'user', component: UserComponentComponent, children: [{
+    path: 'user', component: UserComponentComponent,
+    children: [{
       path: 'history',
       component: OrdersHistoryComponent
-    }]
+    }, {
+      path: 'statistics',
+      component: StatisticsComponent
+    }
+    ]
   },
 ];
 
@@ -51,6 +57,7 @@ const config: SocketIoConfig = {url: 'http://localhost:4444', options: {}};
     SendToEmailComponent,
     UserComponentComponent,
     OrdersHistoryComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,

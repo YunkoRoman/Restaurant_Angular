@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
-import{Response} from "../../interfaces/Response"
+import {Response} from "../../interfaces/Response"
 
 @Component({
   selector: 'app-user-component',
@@ -8,14 +8,13 @@ import{Response} from "../../interfaces/Response"
   styleUrls: ['./user-component.component.css']
 })
 export class UserComponentComponent implements OnInit {
-private defaultPhoto = require('../../assets/defaultIcon.png');
-  constructor(public UserService:UserService) { }
+  private defaultPhoto = require('../../assets/defaultIcon.png');
+
+
+  constructor(public UserService: UserService) {
+  }
 
   ngOnInit() {
-
-    this.UserService.UserOrders().subscribe((data:Response) => {
-      console.log(data.msg);
-    })
 
   }
 

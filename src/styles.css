@@ -160,5 +160,24 @@ input {
 .no-outline:focus {
   outline: none;
 }
+.shadow_box{
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.7);
+}
+.h1{
+  font-family: 'Roboto',sans-serif;
+  margin-left: 15px;
+  font-size: x-large;
+  font-weight: bold;
+  margin-top: 25px;
+
+}
+.h2{
+  font-family: 'Roboto',sans-serif;
+  margin-left: 15px;
+  font-size: large;
+  font-weight: bold;
+  margin-top: 20px;
+
+}
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
