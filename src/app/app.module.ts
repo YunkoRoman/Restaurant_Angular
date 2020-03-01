@@ -20,7 +20,10 @@ import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 import {UserComponentComponent} from './controllers/user-component/user-component.component';
 import {OrdersHistoryComponent} from './controllers/user-component/orders-history/orders-history.component';
 import {StatisticsComponent} from './controllers/user-component/statistics/statistics.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalMakeOutOrderComponent } from './controllers/modal-make-out-order/modal-make-out-order.component';
+import {MatButtonModule} from "@angular/material";
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   {path: '', component: ListRestaurantsComponent},
@@ -58,6 +61,7 @@ const config: SocketIoConfig = {url: 'http://localhost:4444', options: {}};
     UserComponentComponent,
     OrdersHistoryComponent,
     StatisticsComponent,
+    ModalMakeOutOrderComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,10 +70,14 @@ const config: SocketIoConfig = {url: 'http://localhost:4444', options: {}};
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalMakeOutOrderComponent]
 })
 export class AppModule {
 }

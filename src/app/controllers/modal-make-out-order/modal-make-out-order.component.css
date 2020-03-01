@@ -1,0 +1,33 @@
+.modal_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal_send_btn {
+
+}
+
+.modal_body {
+  margin-left: 25px;
+}
+
+.modal_order_opt {
+
+}
+
+
+.modal_order_opt_inp {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.modal_btn {
+  width: 100%;
+  display: flex;
+
+}
+
+.inp_label {
+  width: 100%;
+}

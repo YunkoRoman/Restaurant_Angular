@@ -1,5 +1,5 @@
 import {
-  Component,
+  Component, DoCheck,
   OnInit
 } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
@@ -9,6 +9,8 @@ import {ProductService} from "../../services/product.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {OrderService} from "../../services/order.service";
 import {SocketService} from "../../services/socket.service";
+import {ModalMakeOutOrderComponent} from "../modal-make-out-order/modal-make-out-order.component"
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 
 @Component({
@@ -16,7 +18,7 @@ import {SocketService} from "../../services/socket.service";
   templateUrl: './restaurant.component.html',
   styleUrls: ['./restaurant.component.css']
 })
-export class RestaurantComponent implements OnInit {
+export class RestaurantComponent implements OnInit, DoCheck {
   private restaurant_id: number;
   private productsId: any = [];
   private orderList: any = [];
@@ -37,14 +39,17 @@ export class RestaurantComponent implements OnInit {
               private RestaurantMenuService: RestaurantMenuService,
               private ProductService: ProductService,
               private OrderService: OrderService,
-              private SocketService: SocketService
+              private SocketService: SocketService,
+              private matDialog: MatDialog
   ) {
   }
 
+  ngDoCheck() {
+    this.ShowEmptyBasket()
+  }
 
   ngOnInit() {
     this.CheckBasket();
-
     this.nameForm = new FormGroup({
       quantity: new FormControl('', {
         updateOn: 'blur'
@@ -62,8 +67,6 @@ export class RestaurantComponent implements OnInit {
 
     this.RestaurantMenuService.GetMenus(this.restaurant_id).subscribe((data: Response) => {
       this.menuObj = data.msg;
-      console.log(data.msg);
-
     });
     this.GetProduct();
 
@@ -71,13 +74,12 @@ export class RestaurantComponent implements OnInit {
   }
 
   ShowEmptyBasket() {
-    if (this.orderList.length > 0) {
-      this.showEmptyBasket = false;
-      this.showTotalPrice = true
-    }
-    if (this.orderList.length == 0) {
+    if (this.orderList.length === 0) {
       this.showEmptyBasket = true;
       this.showTotalPrice = false;
+    } else {
+      this.showEmptyBasket = false;
+      this.showTotalPrice = true
     }
   }
 
@@ -99,26 +101,26 @@ export class RestaurantComponent implements OnInit {
     if (localStorage.getItem('basket') != undefined || null) {
       this.basket = JSON.parse(localStorage.getItem('basket'))
     }
+
   }
 
   // Get product for basket
+
   GetProduct() {
 
     if (localStorage.getItem('basket') != undefined || null) {
-
-      this.basket = JSON.parse(localStorage.getItem('basket'));
 
       this.basket.map(p => {
         const product_id = Number(p.product_id);
         this.productsId.push(product_id)
       });
-
+      console.log(this.productsId);
       this.OrderService.OrderProduct(this.productsId, this.restaurant_id).subscribe((data: Response) => {
         if (data.msg !== null || undefined) {
-
           data.msg.forEach(e => {
+
             if (e !== null || undefined) {
-              this.orderList.push(e)
+              this.orderList.push(e);
             }
           })
         }
@@ -133,13 +135,12 @@ export class RestaurantComponent implements OnInit {
 
 
     }
-    this.ShowEmptyBasket()
+
   }
 
 
   addToCard(product) {
     const Product = Object.assign({}, product);
-    console.log(Product);
     this.CheckOrderList(Product);
     if (localStorage.getItem('basket')) {
       let newItem = true;
@@ -173,7 +174,7 @@ export class RestaurantComponent implements OnInit {
 
     this.AddQttToProductObj(this.orderList, this.basket);
 
-    this.ShowEmptyBasket()
+
   }
 
   AddQttToProductObj(ProductArr, ProdBasketArr) {
@@ -209,7 +210,7 @@ export class RestaurantComponent implements OnInit {
     const orderIndex = listValue.indexOf(id);
     this.orderList.splice(orderIndex, 1);
     this.CalculatesTotalPrice();
-    this.ShowEmptyBasket()
+
   }
 
   additionQtt(id: number) {
@@ -255,58 +256,22 @@ export class RestaurantComponent implements OnInit {
       }
     });
     this.CalculatesTotalPrice();
-    this.ShowEmptyBasket()
+
   }
 
-  // Change Qtt in Input via (blur)
-  // changeQtt(id: number) {
-  //   let quantity = this.nameForm.value.quantity;
-  //
-  //   if (quantity == 0 || quantity < 1) {
-  //
-  //     this.basket.forEach(obj => {
-  //       if (obj.product_id == id) {
-  //         obj.quantity = 1
-  //       }
-  //     });
-  //     localStorage.setItem('basket', JSON.stringify(this.basket));
-  //
-  //     this.orderList.forEach(obj => {
-  //
-  //       if (obj.id == id) {
-  //         obj.qtt = 1;
-  //       }
-  //     });
-  //   } else {
-  //
-  //     this.basket.forEach(obj => {
-  //       if (obj.product_id == id) {
-  //         obj.quantity = quantity
-  //       }
-  //     });
-  //     localStorage.setItem('basket', JSON.stringify(this.basket));
-  //
-  //     this.orderList.forEach(obj => {
-  //
-  //       if (obj.id == id) {
-  //         obj.qtt = quantity;
-  //
-  //       }
-  //     });
-  //   }
-  //   this.CalculatesTotalPrice()
-  //
-  // }
-
-  SendOrder() {
-    this.OrderService.SaveOrder(this.orderList, this.restaurant_id, this.totalPrice).subscribe((data: Response) => {
-      console.log(data.msg);
-      if (data.success == true) {
-        this.SocketService.sendRestaurantId(this.restaurant_id)
-      }
-    });
-
-
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "auto";
+    dialogConfig.width = "60%";
+    dialogConfig.data = {
+      orderList: this.orderList,
+      restaurant_id: this.restaurant_id,
+      totalPrice: this.totalPrice
+    };
+    const modalDialog = this.matDialog.open(ModalMakeOutOrderComponent, dialogConfig);
   }
 }
 

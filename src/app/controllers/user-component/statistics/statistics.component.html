@@ -1,0 +1,23 @@
+<div class="sort_box">
+  <button class="sort_btn" (click)="getFormResList()">Choose restaurant</button>
+  <div *ngIf="showRestFilt">
+    <div class="res_list" *ngFor="let rest of restList">
+      <button (click)="choseOneRes(rest.id)">{{rest.name}}</button>
+    </div>
+  </div>
+</div>
+<div class="static_box">
+  <div class="static_box_item shadow_box">
+    <div class="static_box_prod_item" *ngFor="let item of statisticsList2">
+      <p class="h2 rest_name">Restaurant name: {{item.restaurant.name}}</p>
+      <div class="product_descr">
+        <div class="prod_img"></div>
+        <div class="prod_inform">
+          <p class="prod_name">{{item.product.name}}</p>
+          <p class="prod_qtt"> Quantity: {{item.qtt}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

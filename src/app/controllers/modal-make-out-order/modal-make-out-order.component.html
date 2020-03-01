@@ -1,0 +1,28 @@
+<div class="modal_box">
+  <header class="modal_header">
+    <p class="h1">To make out your order</p>
+    <div>
+      <button class="close_modal" (click)="CloseModal()">Close</button>
+    </div>
+  </header>
+  <section class="modal_body">
+    <form class="modal_order_opt" #OptForm="ngForm" (ngSubmit)="SendOrder(OptForm)">
+      <div class="modal_order_opt_inp">
+        <span class="h2 inp_label">Write your table number</span>
+        <input type="number" name="tableNumber" placeholder="Desk number" ngModel>
+      </div>
+      <div class="modal_order_opt_inp">
+        <input type="radio" name="pay" value="cash" id="contactChoice1" ngModel>
+        <label for="contactChoice1">Pay by cash</label>
+        <input [checked]="check" type="radio" name="pay" value="cart"  id="contactChoice2" ngModel>
+        <label for="contactChoice2">Pay by credit cart </label>
+      </div>
+      <div class="modal_btn">
+        <button class="modal_send_btn btn btn-success" > Make order </button>
+
+      </div>
+    </form>
+  </section>
+  <footer>
+  </footer>
+</div>

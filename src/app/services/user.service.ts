@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {AppSettings} from '../constants/appSettings'
 
@@ -7,9 +7,18 @@ import {AppSettings} from '../constants/appSettings'
 })
 export class UserService {
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {
+  }
 
-  UserOrders(){
+  UserOrders() {
     return this.http.get(`${AppSettings.API}/user/orders`)
+  }
+
+  OrdersStatistics() {
+    return this.http.get(`${AppSettings.API}/user/statistic`)
+  }
+
+  FilterOnRest(res_id) {
+    return this.http.get(`${AppSettings.API}/user/filter/${res_id}`)
   }
 }
