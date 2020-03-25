@@ -1,5 +1,5 @@
 .general_box {
-  height: 10000px;
+  height: auto;
   margin-top: 290px;
   display: flex;
   flex-wrap: wrap;
@@ -16,7 +16,7 @@
 }
 
 .res_name {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin-left: 15px;
   font-size: xx-large;
   font-weight: bold;
@@ -51,17 +51,18 @@
   background-color: #ffffff;
 }
 
-.btn_menu{
+.btn_menu {
   color: #4a4a4a;
   width: auto;
   height: 10px;
   margin-top: 60px;
   margin-right: 30px;
-  font-family: Gotham,Arial,Helvetica Neue,Helvetica,sans-serif;
+  font-family: Gotham, Arial, Helvetica Neue, Helvetica, sans-serif;
   line-height: 20px;
   vertical-align: middle;
 }
-.click_menu{
+
+.click_menu {
   margin-top: 35px;
   margin-left: 200px;
   height: 20px;
@@ -69,10 +70,7 @@
   width: 50px;
   border: 1px solid red;
 
-
-
 }
-
 
 .click-menu_items {
   border: 2px solid #003559;
@@ -86,7 +84,8 @@
   opacity: 0;
   z-index: 5;
 }
-.click_menu:hover .click-menu_items{
+
+.click_menu:hover .click-menu_items {
   visibility: visible;
   opacity: 1;
   /*transform: perspective(600px) rotateX(0deg);*/
@@ -106,20 +105,23 @@
   /*box-shadow: 0 0 10px rgba(0,0,0,0.5);*/
   /*overflow-x:hidden*/
 }
+
 .menu_box {
   margin-top: 20px;
   width: 780px;
 }
+
 .menu_box_name {
   font-size: 20px;
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
   color: #252525;
 
 }
+
 /*.box_child_menu:hover{*/
-  /*transform: scale(1.05);*/
-  /*transition: 0.3s;*/
+/*transform: scale(1.05);*/
+/*transition: 0.3s;*/
 /*}*/
 
 .menu_box_product {
@@ -150,8 +152,9 @@
 }
 
 .product_img {
-  height: 65%;
-  background-color: green;
+  height: 150px;
+  width: 185px;
+  border-radius: 5px;
 }
 
 .product_box_footer {
@@ -161,7 +164,7 @@
 }
 
 .product_name {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 13px;
   line-height: 19px;
   text-decoration: none;
@@ -183,7 +186,7 @@
 }
 
 .product_box_btn {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
   padding: 5px;
   height: 28px;
@@ -191,10 +194,11 @@
   color: #934c00;
   background-color: #fc0;
   border-color: #e6b800;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.7);
 }
-.product_box_btn:hover{
+
+.product_box_btn:hover {
   opacity: 0.8;
 }
 
@@ -204,7 +208,7 @@
 }
 
 .basket_res_name {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: xx-large;
   font-weight: bold;
   margin-bottom: 25px;
@@ -225,7 +229,7 @@
 }
 
 .basket_product_name {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 18px;
   line-height: 19px;
   text-decoration: none;
@@ -233,16 +237,18 @@
   /*font-weight: 700;*/
   display: inline;
 }
-.basket_inp{
+
+.basket_inp {
   /*width: 100px;*/
   /*height: 25px;*/
   font-size: 18px;
   color: #000;
   text-align: center;
-  background-color: rgba(255,245,250,0);
+  background-color: rgba(255, 245, 250, 0);
 }
+
 /*.basket_inp:focus{*/
-  /*background-color: rgba(205, 211, 214, 0.63);*/
+/*background-color: rgba(205, 211, 214, 0.63);*/
 /*}*/
 
 .basket_product_quantity {
@@ -257,6 +263,7 @@
   justify-content: space-between;
 
 }
+
 .basket_total_price {
   display: flex;
   justify-content: space-between;
@@ -264,17 +271,17 @@
 }
 
 .basket_total_price_h2 {
-font-family: 'Roboto',sans-serif;
-font-size: 19px;
-line-height: 19px;
-text-decoration: none;
-color: #252525;
-font-weight: 700;
-display: inline;
+  font-family: 'Roboto', sans-serif;
+  font-size: 19px;
+  line-height: 19px;
+  text-decoration: none;
+  color: #252525;
+  font-weight: 700;
+  display: inline;
 }
 
 .basket_total_price_value {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 19px;
   line-height: 19px;
   text-decoration: none;
@@ -291,7 +298,7 @@ display: inline;
 }
 
 .basket_total_price_valute {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 19px;
   line-height: 19px;
   text-decoration: none;
@@ -299,8 +306,6 @@ display: inline;
   font-weight: 700;
   display: inline;
 }
-
-
 
 .make_order {
   margin-top: 50px;
@@ -318,6 +323,11 @@ display: inline;
   font-size: 20px;
   font-weight: 600;
 }
-.order_btn:hover{
+
+.order_btn:hover {
   background-color: #006956;
+}
+
+.product_img_box {
+  height: 65%;
 }

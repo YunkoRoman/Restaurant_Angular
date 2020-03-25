@@ -20,10 +20,11 @@ import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 import {UserComponentComponent} from './controllers/user-component/user-component.component';
 import {OrdersHistoryComponent} from './controllers/user-component/orders-history/orders-history.component';
 import {StatisticsComponent} from './controllers/user-component/statistics/statistics.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ModalMakeOutOrderComponent } from './controllers/modal-make-out-order/modal-make-out-order.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ModalMakeOutOrderComponent} from './controllers/modal-make-out-order/modal-make-out-order.component';
 import {MatButtonModule} from "@angular/material";
-import { MatDialogModule } from '@angular/material/dialog';
+import {MatDialogModule} from '@angular/material/dialog';
+import {Guard} from './security/.guard'
 
 const routes: Routes = [
   {path: '', component: ListRestaurantsComponent},
@@ -34,7 +35,10 @@ const routes: Routes = [
   {path: 'email', component: SendToEmailComponent},
   {path: 'basket', component: BasketComponent},
   {
-    path: 'user', component: UserComponentComponent,
+    path: 'user',
+    component: UserComponentComponent,
+    canActivate: [Guard],
+    canActivateChild: [Guard],
     children: [{
       path: 'history',
       component: OrdersHistoryComponent
@@ -75,7 +79,7 @@ const config: SocketIoConfig = {url: 'http://localhost:4444', options: {}};
     MatButtonModule,
     MatDialogModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true}, Guard],
   bootstrap: [AppComponent],
   entryComponents: [ModalMakeOutOrderComponent]
 })

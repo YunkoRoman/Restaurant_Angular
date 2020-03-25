@@ -14,7 +14,7 @@
         </p>
         <div class="product_box_all">
           <div *ngFor="let prod of menu.products" class="product_box_description">
-            <div class="product_img"></div>
+            <div class="product_img_box"><img [src]="host + prod.path" [alt]="prod.name"  class="product_img"></div>
             <p class="product_name">{{prod.name}}</p>
             <div class="product_box_footer">
               <span class="product_price">
@@ -45,10 +45,10 @@
           <div class="basket_product_quantity_opt">
             <span (click)="subtractionQtt(product.id)"><img [src]="minusIcon" alt="Minus"></span>
             <div>
-              <span  class="basket_inp">{{product.qtt}}</span>
+              <span class="basket_inp">{{product.qtt}}</span>
               <!--<form [formGroup]="nameForm">-->
-                <!--<input formControlName="quantity" [value]="product.qtt" (blur)="changeQtt(product.id)"-->
-                       <!--class="basket_inp">-->
+              <!--<input formControlName="quantity" [value]="product.qtt" (blur)="changeQtt(product.id)"-->
+              <!--class="basket_inp">-->
               <!--</form>-->
             </div>
             <span (click)="additionQtt(product.id)"><img [src]="plusIcon" alt="Plus"></span>
@@ -59,7 +59,7 @@
       <div *ngIf="showEmptyBasket" class="basket_res_name">Your basket is empty</div>
       <div class="basket_total_price" *ngIf="showTotalPrice">
         <p class="basket_total_price_h2">Total Price</p>
-        <div  class="basket_total_price_desc">
+        <div class="basket_total_price_desc">
           <span class="basket_total_price_value">{{totalPrice}}</span>
           <span class="basket_total_price_valute">грн</span>
         </div>

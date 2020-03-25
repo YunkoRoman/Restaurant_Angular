@@ -19,20 +19,21 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
   styleUrls: ['./restaurant.component.css']
 })
 export class RestaurantComponent implements OnInit, DoCheck {
-  private restaurant_id: number;
-  private productsId: any = [];
-  private orderList: any = [];
-  private menuObj: any = [];
-  private restaurantInfo: any = [];
-  private basket: any = [];
-  private nameForm: FormGroup;
-  private priceArr: any = [];
-  private totalPrice: number;
-  private showEmptyBasket: boolean;
-  private showTotalPrice: boolean;
-  private plusIcon = require("../../assets/plus 24.png");
-  private minusIcon = require("../../assets/minus 24.png");
-  private deleteIcon = require("../../assets/delete.png");
+  public restaurant_id: number;
+  public productsId: any = [];
+  public orderList: any = [];
+  public menuObj: any = [];
+  public restaurantInfo: any = [];
+  public basket: any = [];
+  public nameForm: FormGroup;
+  public priceArr: any = [];
+  public totalPrice: number;
+  public showEmptyBasket: boolean;
+  public showTotalPrice: boolean;
+  public plusIcon = require("../../assets/plus 24.png");
+  public minusIcon = require("../../assets/minus 24.png");
+  public deleteIcon = require("../../assets/delete.png");
+  public host: string = 'http://localhost:3001/';
 
 
   constructor(private route: ActivatedRoute,
@@ -66,6 +67,7 @@ export class RestaurantComponent implements OnInit, DoCheck {
     });
 
     this.RestaurantMenuService.GetMenus(this.restaurant_id).subscribe((data: Response) => {
+      console.log(data.msg);
       this.menuObj = data.msg;
     });
     this.GetProduct();
@@ -116,6 +118,7 @@ export class RestaurantComponent implements OnInit, DoCheck {
       });
       console.log(this.productsId);
       this.OrderService.OrderProduct(this.productsId, this.restaurant_id).subscribe((data: Response) => {
+
         if (data.msg !== null || undefined) {
           data.msg.forEach(e => {
 
@@ -261,7 +264,7 @@ export class RestaurantComponent implements OnInit, DoCheck {
 
   openModal() {
     const dialogConfig = new MatDialogConfig();
-    // The user can't close the dialog by clicking outside its body
+
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
     dialogConfig.height = "auto";

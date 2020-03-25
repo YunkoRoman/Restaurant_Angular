@@ -42,9 +42,8 @@ export class ModalMakeOutOrderComponent implements OnInit {
     console.log(this.data);
     this.OrderService.SaveOrder(this.data.orderList, this.data.restaurant_id, this.data.totalPrice, Form.value.tableNumber, Form.value.pay)
       .subscribe((data:Response) => {
-        console.log(data);
         if (data.success == true) {
-                this.SocketService.sendRestaurantId(this.restaurant_id)
+                this.SocketService.sendRestaurantId(this.data.restaurant_id)
               }
       } )
   }
