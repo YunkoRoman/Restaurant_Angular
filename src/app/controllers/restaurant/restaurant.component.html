@@ -46,10 +46,7 @@
             <span (click)="subtractionQtt(product.id)"><img [src]="minusIcon" alt="Minus"></span>
             <div>
               <span class="basket_inp">{{product.qtt}}</span>
-              <!--<form [formGroup]="nameForm">-->
-              <!--<input formControlName="quantity" [value]="product.qtt" (blur)="changeQtt(product.id)"-->
-              <!--class="basket_inp">-->
-              <!--</form>-->
+
             </div>
             <span (click)="additionQtt(product.id)"><img [src]="plusIcon" alt="Plus"></span>
           </div>
@@ -65,7 +62,7 @@
         </div>
       </div>
       <div class="make_order" *ngIf="showTotalPrice">
-        <button class="order_btn" (click)="openModal()"> Send order</button>
+        <button class="order_btn" (click)="openModal()"> To order </button>
       </div>
     </div>
   </div>

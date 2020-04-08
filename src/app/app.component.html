@@ -1,20 +1,20 @@
 <div class="Head">
   <div class="Head_child">
     <div class="Head_rout">
-      <button routerLink="" type="button" class="btn btn-outline-primary">Головна</button>
+      <button routerLink="" type="button" class="btn btn-outline-primary">Main page</button>
     </div>
 
     <div class="login" *ngIf="visio">
       <div class="register-btn">
-        <button routerLink="registration" type="button" class="btn btn-outline-success">Зареєструватися</button>
+        <button routerLink="registration" type="button" class="btn btn-outline-success">Sign up</button>
       </div>
       <div class="log_in">
-        <button routerLink="login" type="button" class="btn btn-outline-success">Увійти</button>
+        <button routerLink="login" type="button" class="btn btn-outline-success">Sing in</button>
       </div>
     </div>
     <div class="icon"  *ngIf="visioIcon">
       <a routerLink="user" routerLinkActive="active"> <img [src]="icon" alt=""></a>
-      <button (click)="exiteBtn()" routerLink="">Вихід</button>
+      <button (click)="exiteBtn()" routerLink="">Sing out</button>
     </div>
   </div>
 </div>

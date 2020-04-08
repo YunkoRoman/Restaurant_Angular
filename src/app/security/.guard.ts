@@ -36,6 +36,7 @@ export class Guard implements CanActivate, CanActivateChild {
 
       }),
       catchError((err) => {
+        console.log(err);
         this.router.navigate(['login']);
         return of(false);
       })

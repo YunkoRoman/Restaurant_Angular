@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RegistrationService} from "../../services/registration.service";
-import {NgForm} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Response} from "../../interfaces/Response";
 import {Router} from "@angular/router";
+import {catchError} from "rxjs/operators";
+import {passValidator} from '../../validator';
 
 
 @Component({
@@ -12,28 +14,50 @@ import {Router} from "@angular/router";
 })
 export class RegistrationComponent implements OnInit {
 
+  form: FormGroup;
+
   constructor(private RegistrService: RegistrationService,
-              private router:Router) { }
+              private router: Router,
+              private fb: FormBuilder) {
+
+    this.form = this.fb.group({
+      name: ["", [Validators.required, Validators.minLength(3)]],
+      surname: ["", [Validators.required, Validators.minLength(3)]],
+      email: ["", Validators.compose([Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
+      password: "",
+      repPasw: ['', passValidator ],
+    });
+
+
+
+  }
 
   ngOnInit() {
-  }
-  sendForm(loginForm:NgForm) {
-    if (loginForm.value.password === loginForm.value.password2) {
-    this.RegistrService.RegistrUser(loginForm.value.name, loginForm.value.surname,loginForm.value.email, loginForm.value.password)
-      .subscribe((data: Response) =>{
-
-        if (data.success == true) {alert('Ви успішно зареєструвались');
-          this.router.navigate(['email'])}
-        if (data.success == false) alert(data.msg);
-
-      },
-      (err:any) => {
-        alert (err.error.msg);
-      }
-      )}
-      if (loginForm.value.password != loginForm.value.password2) {
-      alert('Поролі не співпадають')
-      }
 
   }
+
+  onSubmit() {
+    if (this.form.valid && this.form.value.password !=='') {
+
+      this.RegistrService.RegistrUser(this.form.value)
+        .subscribe(
+          (data: Response) =>{
+
+            if (data.success == true) {alert('Ви успішно зареєструвались');
+            this.router.navigate(['email'])}
+        },
+          err => {
+            if (err){
+              alert(err.error.message)
+            }
+          }
+
+        )
+    }
+    if (this.form.invalid && this.form.value.password =='') {
+      alert('You should fill out correctly this form')
+    }
+  }
+
 }

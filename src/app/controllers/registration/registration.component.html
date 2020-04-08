@@ -1,12 +1,24 @@
 <div class="login-page">
   <div class="form">
-    <form class="registration-form" #registrationForm = "ngForm" (ngSubmit)="sendForm(registrationForm)">
-      <input  type="text" name="name" placeholder="Ваше ім'я" ngModel />
-      <input  type="text" name="surname" placeholder="Ваше прізвище" ngModel />
-      <input  type="email" name="email" placeholder="Email" ngModel />
-      <input type="password" name="password" placeholder="Пароль" ngModel />
-      <input type="password" name="password2" placeholder="Повторіть пароль" ngModel />
-      <button> Зареєструватись </button>
+    <form class="registration-form" [formGroup]="form">
+      <input formControlName="name" type="text" name="name" placeholder="Your name"/>
+      <div class="alert alert-danger" role="alert" *ngIf="form.controls.name.invalid && form.controls.name.touched">
+        The name should be longer than two characters
+      </div>
+      <input formControlName="surname" type="text" name="surname" placeholder="Your surname"/>
+      <div class="alert alert-danger" role="alert" *ngIf="form.controls.surname.invalid && form.controls.surname.touched">
+        The surname should be longer than two characters
+      </div>
+      <input formControlName="email" type="email" name="email" placeholder="Email"/>
+      <div class="alert alert-danger" role="alert" *ngIf="form.controls.email.invalid && form.controls.email.touched">
+        Please, enter a valid email
+      </div>
+      <input formControlName="password" type="password" name="password" placeholder="Password"/>
+      <input formControlName="repPasw" type="password" name="password2" placeholder="Repeat password"/>
+      <div class="alert alert-danger" role="alert" *ngIf="form.controls.repPasw.invalid && form.controls.repPasw.touched">
+        The passwords should be same
+      </div>
+      <button (click)="onSubmit()"> Sign up</button>
     </form>
   </div>
 </div>
